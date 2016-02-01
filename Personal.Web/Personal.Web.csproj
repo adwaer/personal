@@ -89,6 +89,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Abstractions, Version=2.0.2.26, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Configuration.Abstractions.2.0.2.26\lib\net45\System.Configuration.Abstractions.dll</HintPath>
@@ -218,6 +222,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\IocConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -258,6 +263,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ViewModelConfigurator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -328,6 +334,24 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Personal.Domain\Personal.Domain.csproj">
+      <Project>{BEF42A82-8D2F-4D89-AE8F-3F61F03842C4}</Project>
+      <Name>Personal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Personal.Mapping\Personal.Mapping.csproj">
+      <Project>{B4CCCBC7-BBD3-43B0-9AF1-542664650CB8}</Project>
+      <Name>Personal.Mapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Personal.Schema\Personal.Schema.csproj">
+      <Project>{6E7EF600-44C2-47F5-BFA0-C2A3C75ACF74}</Project>
+      <Name>Personal.Schema</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Personal.User\Personal.User.csproj">
+      <Project>{72B234FA-A921-4A7B-B783-1254850FE0EF}</Project>
+      <Name>Personal.User</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
