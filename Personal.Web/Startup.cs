@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Personal.Startup))]
+[assembly: OwinStartup(typeof(Personal.Web.Startup))]
 
 namespace Personal.Web
 {

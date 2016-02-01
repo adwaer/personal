@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using Personal.Areas.HelpPage.ModelDescriptions;
+using Personal.Web.Areas.HelpPage.ModelDescriptions;
 
 namespace Personal.Web.Areas.HelpPage
 {

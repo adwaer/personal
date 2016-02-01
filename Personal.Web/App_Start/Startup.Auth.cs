@@ -8,8 +8,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Personal.Providers;
-using Personal.Models;
+using Personal.Web.Models;
+using Personal.Web.Providers;
 
 namespace Personal.Web
 {

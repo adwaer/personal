@@ -6,16 +6,15 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Personal.Models;
-using Personal.Providers;
-using Personal.Results;
+using Personal.Web.Models;
+using Personal.Web.Providers;
+using Personal.Web.Results;
 
 namespace Personal.Web.Controllers
 {

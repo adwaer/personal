@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using Personal.Areas.HelpPage.ModelDescriptions;
+using Personal.Web.Areas.HelpPage.ModelDescriptions;
 
 namespace Personal.Web.Areas.HelpPage.Models
 {
