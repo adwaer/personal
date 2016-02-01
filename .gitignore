@@ -24,7 +24,6 @@ _UpgradeReport_Files/
 ###############
 bin/
 obj/
-TestResults/
 uploads/
 ###################
 # Web publish log #
@@ -75,10 +74,12 @@ _[Ss]cripts
 *.ncrunchsolution
 *.dot[Cc]over
 /bower_components
-/Personal.Web.Web/bower_components
+/Personal.Web/bower_components
 /.vs/config/
-/Personal.Web.Web/Content/logs/
-/Personal.Web.Web/App_Data
+/Personal.Web/Content/logs/
+/Personal.Web/App_Data
 UpgradeLog*
 node_modules
-/Personal.Web.Web/Content/dist/
+/Personal.Web/Content/dist/
+obj
+bin
