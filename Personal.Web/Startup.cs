@@ -6,7 +6,7 @@ using Owin;
 
 [assembly: OwinStartup(typeof(Personal.Startup))]
 
-namespace Personal
+namespace Personal.Web
 {
     public partial class Startup
     {

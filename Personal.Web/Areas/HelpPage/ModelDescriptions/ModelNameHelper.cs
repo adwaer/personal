@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Personal.Areas.HelpPage.ModelDescriptions
+namespace Personal.Web.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

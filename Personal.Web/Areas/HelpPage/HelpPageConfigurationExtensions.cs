@@ -14,7 +14,7 @@ using System.Web.Http.Description;
 using Personal.Areas.HelpPage.ModelDescriptions;
 using Personal.Areas.HelpPage.Models;
 
-namespace Personal.Areas.HelpPage
+namespace Personal.Web.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

@@ -1,4 +1,4 @@
-namespace Personal.Areas.HelpPage
+namespace Personal.Web.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

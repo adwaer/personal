@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Web.Http.Description;
 using Personal.Areas.HelpPage.ModelDescriptions;
 
-namespace Personal.Areas.HelpPage.Models
+namespace Personal.Web.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

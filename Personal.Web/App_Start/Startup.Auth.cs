@@ -11,7 +11,7 @@ using Owin;
 using Personal.Providers;
 using Personal.Models;
 
-namespace Personal
+namespace Personal.Web
 {
     public partial class Startup
     {

@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Personal.Areas.HelpPage.ModelDescriptions;
 using Personal.Areas.HelpPage.Models;
 
-namespace Personal.Areas.HelpPage.Controllers
+namespace Personal.Web.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Personal.Controllers
+namespace Personal.Web.Controllers
 {
     [Authorize]
     public class ValuesController : ApiController

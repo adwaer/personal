@@ -7,7 +7,7 @@ using System.Web.Http.Description;
 using System.Xml.XPath;
 using Personal.Areas.HelpPage.ModelDescriptions;
 
-namespace Personal.Areas.HelpPage
+namespace Personal.Web.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

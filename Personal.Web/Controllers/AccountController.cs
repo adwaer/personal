@@ -17,7 +17,7 @@ using Personal.Models;
 using Personal.Providers;
 using Personal.Results;
 
-namespace Personal.Controllers
+namespace Personal.Web.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
