@@ -123,4 +123,7 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="ImAzatFromRussia" xml:space="preserve">
+    <value>I'm Azat Buriev from Russia</value>
+  </data>
 </root>

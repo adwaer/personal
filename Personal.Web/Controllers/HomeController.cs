@@ -10,9 +10,7 @@ namespace Personal.Web.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
-            return View();
+            return File("~/Frontend/index.html", "text/html");
         }
     }
 }

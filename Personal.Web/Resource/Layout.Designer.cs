@@ -77,5 +77,14 @@ namespace Resources {
                 return ResourceManager.GetString("Home", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;m Azat Buriev from Russia.
+        /// </summary>
+        public static string ImAzatFromRussia {
+            get {
+                return ResourceManager.GetString("ImAzatFromRussia", resourceCulture);
+            }
+        }
     }
 }
