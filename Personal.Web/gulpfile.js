@@ -10,10 +10,9 @@ var directoryMap = require("gulp-directory-map");
 var browserSync = require("browser-sync").create();
 
 // settings
-var destDir = "./Content/dist";
-var pathPrefix = "/Content/dist/";
-var statTemplatesDir = "Frontend/Stat/templates";
-var siteUrl = "http://localhost:9165/";
+var destDir = "./Frontend/dist";
+var pathPrefix = "/Frontend/dist/";
+var siteUrl = "http://ps.ru/";
 
 gulp.task("bundle", ["bundle-clean"], function () {
     return gulp.src("./bundle.config.js")
@@ -51,16 +50,7 @@ gulp.task("reload-and-notify", function () {
     gulp.src(".").pipe(notify("bundling finished"));
 });
 
-gulp.task("stat-templates", function () {
-    gulp.src(statTemplatesDir + "/**/*.html")
-      .pipe(directoryMap({
-          filename: "stat-templates.json"
-          //prefix: statTemplatesDir
-      }))
-      .pipe(gulp.dest(destDir));
-});
-
-gulp.task("default", ["bundle", "stat-templates"], function () {
+gulp.task("default", ["bundle"], function () {
     //gulp.start("reload-and-notify");
 });
 
