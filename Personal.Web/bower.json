@@ -12,7 +12,8 @@
     "angular-forms.js": "2.0.2",
     "fullcalendar": "2.3.1",
     "components-font-awesome": "4.4.0",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "bootstrap": "3.3.0"
   },
   "resolutions": {
     "angular": "1.4.9"

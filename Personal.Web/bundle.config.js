@@ -17,17 +17,22 @@ module.exports = {
                 rev: false
             }
         },
+        "external": {
+            scripts: "Frontend/external/**/*.js",
+            styles: "Frontend/external/**/*.css",
+            options: {
+                rev: false
+            }
+        },
         "main": {
-            scripts: "Frontend/**/*.js",
-            styles: "Frontend/**/*.css",
+            scripts: "Frontend/main/**/*.js",
+            styles: "Frontend/main/**/*.css",
             options: {
                 transforms: {
                     scripts: compatTransforms
                 },
-                pluginOptions: {
-                    'gulp-uglify': {
-                        mangle: false
-                    }
+                options: {
+                    rev: false
                 },
                 rev: false
             }
