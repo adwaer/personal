@@ -80,6 +80,5 @@ _[Ss]cripts
 /Personal.Web/App_Data
 UpgradeLog*
 node_modules
-/Personal.Web/Content/dist/
 obj
 bin

@@ -10,32 +10,17 @@ var compatTransforms = lazypipe()
 
 module.exports = {
     bundle: {
-        "vendor": {
-            scripts: "bower_components/**/*.js",
-            styles: "bower_components/**/*.css",
-            options: {
-                rev: false
-            }
-        },
+        //"vendor": {
+        //    scripts: "bower_components/**/*.js",
+        //    styles: "bower_components/**/*.css"
+        //},
         "external": {
             scripts: "Frontend/external/**/*.js",
-            styles: "Frontend/external/**/*.css",
-            options: {
-                rev: false
-            }
+            styles: "Frontend/external/**/*.css"
         },
         "main": {
             scripts: "Frontend/main/**/*.js",
-            styles: "Frontend/main/**/*.css",
-            options: {
-                transforms: {
-                    scripts: compatTransforms
-                },
-                options: {
-                    rev: false
-                },
-                rev: false
-            }
+            styles: "Frontend/main/**/*.css"
         }
         //,
         //"load-gulp-bundles": {
