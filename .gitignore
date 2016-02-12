@@ -82,3 +82,4 @@ UpgradeLog*
 node_modules
 obj
 bin
+/.vs
