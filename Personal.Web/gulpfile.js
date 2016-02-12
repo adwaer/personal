@@ -6,8 +6,7 @@ var bundle = require("gulp-bundle-assets");
 var del = require("del");
 var notify = require("gulp-notify");
 var path = require("path");
-var directoryMap = require("gulp-directory-map");
-var browserSync = require("browser-sync").create();
+var uglify = require('gulp-uglify');
 
 // settings
 var destDir = "./Frontend/dist";
@@ -37,21 +36,12 @@ gulp.task("watch-only", function () {
     watchBundles();
 });
 
-gulp.task("watch", function () {
-    browserSync.init({
-        proxy: siteUrl
-    });
+gulp.task("default", ["bundle"], function () {});
 
-    watchBundles();
-});
-
-gulp.task("reload-and-notify", function () {
-    browserSync.reload();
-    gulp.src(".").pipe(notify("bundling finished"));
-});
-
-gulp.task("default", ["bundle"], function () {
-    //gulp.start("reload-and-notify");
+gulp.task('compress', function () {
+    return gulp.src('lib/*.js')
+      .pipe(uglify())
+      .pipe(gulp.dest('dist'));
 });
 
 function clean() {

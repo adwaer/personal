@@ -258,8 +258,8 @@
     <Content Include="Frontend\external\css\responsive.css" />
     <Content Include="Frontend\external\css\simple-line-icons.css" />
     <Content Include="Frontend\external\css\style.css" />
-    <Content Include="Frontend\external\fonts\Simple-Line-Icons.dev.svg" />
-    <Content Include="Frontend\external\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Frontend\fonts\Simple-Line-Icons.dev.svg" />
+    <Content Include="Frontend\fonts\Simple-Line-Icons.svg" />
     <Content Include="Frontend\external\img\adwaer.png" />
     <Content Include="Frontend\external\img\after_effects.svg" />
     <Content Include="Frontend\external\img\amazon.png" />
@@ -309,9 +309,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Frontend\external\fonts\Simple-Line-Icons.eot" />
-    <Content Include="Frontend\external\fonts\Simple-Line-Icons.ttf" />
-    <Content Include="Frontend\external\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Frontend\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Frontend\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Frontend\fonts\Simple-Line-Icons.woff" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
