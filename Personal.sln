@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{5649344D-94AB-4430-A8D4-7B309A083B88}"
 EndProject
@@ -24,6 +24,79 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal.Console", "Personal.Console\Personal.Console.csproj", "{37BFB5F3-1FF8-4942-BB49-56117AEBB850}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal.WebApi", "Personal.WebApi\Personal.WebApi.csproj", "{29C0A0FB-34CB-444A-9B4B-1A2F837472C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{4CCEF23E-141E-4AEB-8D16-4A91803203A5}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\bundle.config.js = Frontend\bundle.config.js
+		Frontend\gulpfile.js = Frontend\gulpfile.js
+		Frontend\package.json = Frontend\package.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DE10CA71-6A97-429F-BB4E-B193E26CC008}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\index.html = Frontend\src\index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dril", "dril", "{D3B57310-37C2-4D12-8D14-151E8A01CFDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{2AF45C2A-7CED-4171-9C8B-EE2D2C9D7AC8}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\dril\css\animate.css = Frontend\src\dril\css\animate.css
+		Frontend\src\dril\css\preloader.css = Frontend\src\dril\css\preloader.css
+		Frontend\src\dril\css\responsive.css = Frontend\src\dril\css\responsive.css
+		Frontend\src\dril\css\simple-line-icons.css = Frontend\src\dril\css\simple-line-icons.css
+		Frontend\src\dril\css\style.css = Frontend\src\dril\css\style.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{B30770EF-69D0-495E-AC55-7CC65099FD74}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\dril\fonts\Simple-Line-Icons.dev.svg = Frontend\src\dril\fonts\Simple-Line-Icons.dev.svg
+		Frontend\src\dril\fonts\Simple-Line-Icons.eot = Frontend\src\dril\fonts\Simple-Line-Icons.eot
+		Frontend\src\dril\fonts\Simple-Line-Icons.svg = Frontend\src\dril\fonts\Simple-Line-Icons.svg
+		Frontend\src\dril\fonts\Simple-Line-Icons.ttf = Frontend\src\dril\fonts\Simple-Line-Icons.ttf
+		Frontend\src\dril\fonts\Simple-Line-Icons.woff = Frontend\src\dril\fonts\Simple-Line-Icons.woff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{634C893C-E425-423B-9ECA-BE35367C05D5}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\dril\img\.DS_Store = Frontend\src\dril\img\.DS_Store
+		Frontend\src\dril\img\after_effects.svg = Frontend\src\dril\img\after_effects.svg
+		Frontend\src\dril\img\amazon.png = Frontend\src\dril\img\amazon.png
+		Frontend\src\dril\img\apple-touch-icon-ipad-retina.png = Frontend\src\dril\img\apple-touch-icon-ipad-retina.png
+		Frontend\src\dril\img\apple-touch-icon-ipad.png = Frontend\src\dril\img\apple-touch-icon-ipad.png
+		Frontend\src\dril\img\apple-touch-icon-iphone-retina.png = Frontend\src\dril\img\apple-touch-icon-iphone-retina.png
+		Frontend\src\dril\img\apple-touch-icon-iphone.png = Frontend\src\dril\img\apple-touch-icon-iphone.png
+		Frontend\src\dril\img\bill.jpg = Frontend\src\dril\img\bill.jpg
+		Frontend\src\dril\img\curb.png = Frontend\src\dril\img\curb.png
+		Frontend\src\dril\img\dan.jpg = Frontend\src\dril\img\dan.jpg
+		Frontend\src\dril\img\elance-odesk.png = Frontend\src\dril\img\elance-odesk.png
+		Frontend\src\dril\img\eric.png = Frontend\src\dril\img\eric.png
+		Frontend\src\dril\img\favicon.png = Frontend\src\dril\img\favicon.png
+		Frontend\src\dril\img\flash.svg = Frontend\src\dril\img\flash.svg
+		Frontend\src\dril\img\hero-img.png = Frontend\src\dril\img\hero-img.png
+		Frontend\src\dril\img\icon.png = Frontend\src\dril\img\icon.png
+		Frontend\src\dril\img\illustrator.svg = Frontend\src\dril\img\illustrator.svg
+		Frontend\src\dril\img\indesign.svg = Frontend\src\dril\img\indesign.svg
+		Frontend\src\dril\img\payoneer.png = Frontend\src\dril\img\payoneer.png
+		Frontend\src\dril\img\photoshop.svg = Frontend\src\dril\img\photoshop.svg
+		Frontend\src\dril\img\ramil.jpg = Frontend\src\dril\img\ramil.jpg
+		Frontend\src\dril\img\s1.png = Frontend\src\dril\img\s1.png
+		Frontend\src\dril\img\s2.png = Frontend\src\dril\img\s2.png
+		Frontend\src\dril\img\s3.png = Frontend\src\dril\img\s3.png
+		Frontend\src\dril\img\s4.png = Frontend\src\dril\img\s4.png
+		Frontend\src\dril\img\s5.png = Frontend\src\dril\img\s5.png
+		Frontend\src\dril\img\s6.png = Frontend\src\dril\img\s6.png
+		Frontend\src\dril\img\trianglify-background.svg = Frontend\src\dril\img\trianglify-background.svg
+		Frontend\src\dril\img\user.png = Frontend\src\dril\img\user.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{EE642A2C-F0A8-42D1-9984-70E3B77D181A}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\dril\js\drifolio.js = Frontend\src\dril\js\drifolio.js
+		Frontend\src\dril\js\jquery.jribbble-1.0.1.ugly.js = Frontend\src\dril\js\jquery.jribbble-1.0.1.ugly.js
+		Frontend\src\dril\js\jquery.nicescroll.min.js = Frontend\src\dril\js\jquery.nicescroll.min.js
+		Frontend\src\dril\js\wow.min.js = Frontend\src\dril\js\wow.min.js
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,5 +144,11 @@ Global
 		{B4CCCBC7-BBD3-43B0-9AF1-542664650CB8} = {DC95B12F-9789-4585-A910-05307D7172AA}
 		{37BFB5F3-1FF8-4942-BB49-56117AEBB850} = {5649344D-94AB-4430-A8D4-7B309A083B88}
 		{29C0A0FB-34CB-444A-9B4B-1A2F837472C3} = {63FD3403-CE1B-443E-8026-23EE924D3B3F}
+		{DE10CA71-6A97-429F-BB4E-B193E26CC008} = {4CCEF23E-141E-4AEB-8D16-4A91803203A5}
+		{D3B57310-37C2-4D12-8D14-151E8A01CFDC} = {DE10CA71-6A97-429F-BB4E-B193E26CC008}
+		{2AF45C2A-7CED-4171-9C8B-EE2D2C9D7AC8} = {D3B57310-37C2-4D12-8D14-151E8A01CFDC}
+		{B30770EF-69D0-495E-AC55-7CC65099FD74} = {D3B57310-37C2-4D12-8D14-151E8A01CFDC}
+		{634C893C-E425-423B-9ECA-BE35367C05D5} = {D3B57310-37C2-4D12-8D14-151E8A01CFDC}
+		{EE642A2C-F0A8-42D1-9984-70E3B77D181A} = {D3B57310-37C2-4D12-8D14-151E8A01CFDC}
 	EndGlobalSection
 EndGlobal

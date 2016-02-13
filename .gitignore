@@ -25,6 +25,7 @@ _UpgradeReport_Files/
 bin/
 obj/
 dist/
+bower_components/
 ###################
 # Web publish log #
 ###################

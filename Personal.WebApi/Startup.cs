@@ -16,11 +16,11 @@ namespace Personal.WebApi
         {
             var container = IocConfig.Configure();
             ConfigureApp(container, app);
-
+            
             app.Run(context =>
             {
                 context.Response.ContentType = "text/plain";
-                return context.Response.WriteAsync("Hello, world.");
+                return context.Response.WriteAsync("Servise is online.");
             });
         }
 
