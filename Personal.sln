@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{5649344D-94AB-4430-A8D4-7B309A083B88}"
 EndProject
@@ -99,6 +99,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{5EE50650
 		Frontend\src\fonts\Simple-Line-Icons.woff = Frontend\src\fonts\Simple-Line-Icons.woff
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{0327DE0E-CF81-4F5A-9643-ED32F9587BF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{138ED0B2-F562-488E-980E-23DDC9617C1F}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\main\core\cec.crud.js = Frontend\src\main\core\cec.crud.js
+		Frontend\src\main\core\cec.resource.js = Frontend\src\main\core\cec.resource.js
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,5 +159,7 @@ Global
 		{634C893C-E425-423B-9ECA-BE35367C05D5} = {D3B57310-37C2-4D12-8D14-151E8A01CFDC}
 		{EE642A2C-F0A8-42D1-9984-70E3B77D181A} = {D3B57310-37C2-4D12-8D14-151E8A01CFDC}
 		{5EE50650-8C38-4658-850A-3C7462842A82} = {DE10CA71-6A97-429F-BB4E-B193E26CC008}
+		{0327DE0E-CF81-4F5A-9643-ED32F9587BF2} = {DE10CA71-6A97-429F-BB4E-B193E26CC008}
+		{138ED0B2-F562-488E-980E-23DDC9617C1F} = {0327DE0E-CF81-4F5A-9643-ED32F9587BF2}
 	EndGlobalSection
 EndGlobal
