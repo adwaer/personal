@@ -17,23 +17,14 @@ module.exports = {
                 "bower_components/angular-route/angular-route.min.js",
                 "bower_components/angular-resource/angular-resource.min.js",
                 "bower_components/underscore/underscore-min.js",
-                "bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"
-            ],
-            styles: [
-                "bower_components/angular-bootstrap/ui-bootstrap-csp.css"
-            ],
-            options: {
-                rev: false
-            }
-        },
-        "dril": {
-            scripts: [
+                "bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
                 "src/dril/js/jquery.nicescroll.min.js",
                 "src/dril/js/jquery.jribbble-1.0.1.ugly.js",
                 "src/dril/js/drifolio.js",
                 "src/dril/js/wow.min.js"
             ],
             styles: [
+                "bower_components/angular-bootstrap/ui-bootstrap-csp.css",
                 "src/dril/css/preloader.css",
                 "src/dril/css/style.css",
                 "src/dril/css/responsive.css",
