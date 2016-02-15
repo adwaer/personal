@@ -37,5 +37,8 @@
     "gulp.spritesmith": "^6.2.0",
     "lazypipe": "^1.0.1",
     "serve-static": "^1.10.2"
+  },
+  "dependencies": {
+    "lodash": "^4.3.0"
   }
 }
