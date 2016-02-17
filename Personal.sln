@@ -100,10 +100,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{5EE50650
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{0327DE0E-CF81-4F5A-9643-ED32F9587BF2}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\main\app.js = Frontend\src\main\app.js
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{138ED0B2-F562-488E-980E-23DDC9617C1F}"
 	ProjectSection(SolutionItems) = preProject
 		Frontend\src\main\core\cec.crud.js = Frontend\src\main\core\cec.crud.js
+		Frontend\src\main\core\cec.fileread.js = Frontend\src\main\core\cec.fileread.js
 		Frontend\src\main\core\cec.resource.js = Frontend\src\main\core\cec.resource.js
 	EndProjectSection
 EndProject
