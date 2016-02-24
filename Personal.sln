@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{4C
 		Frontend\bundle.config.js = Frontend\bundle.config.js
 		Frontend\gulpfile.js = Frontend\gulpfile.js
 		Frontend\package.json = Frontend\package.json
+		Frontend\settings.json = Frontend\settings.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DE10CA71-6A97-429F-BB4E-B193E26CC008}"
