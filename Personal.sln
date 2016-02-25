@@ -109,6 +109,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{138ED0B2-F
 	ProjectSection(SolutionItems) = preProject
 		Frontend\src\main\core\cec.crud.js = Frontend\src\main\core\cec.crud.js
 		Frontend\src\main\core\cec.fileread.js = Frontend\src\main\core\cec.fileread.js
+		Frontend\src\main\core\cec.requests.js = Frontend\src\main\core\cec.requests.js
 		Frontend\src\main\core\cec.resource.js = Frontend\src\main\core\cec.resource.js
 	EndProjectSection
 EndProject

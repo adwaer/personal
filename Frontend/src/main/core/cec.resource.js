@@ -23,7 +23,7 @@ angular
             }
         }
     })
-    .service('resourceService', function ($http) {
+    .service('resourceService', function (resource) {
 
         var resources = {};
 
@@ -53,8 +53,7 @@ angular
             loadings[type] = true;
             waiters[type] = [];
 
-            $http.get('/api/resource/' + type)
-                .then(function (data) {
+            var data = resource.get({ id: type }, function () {
                     data = data.data;
                     resources[type] = data;
                     callback(getValue(data, name));
