@@ -2,11 +2,15 @@
 
 var lazypipe = require("lazypipe");
 var babel = require("gulp-babel");
+var annotate = require('gulp-ng-annotate');
 
 var compatTransforms = lazypipe()
     .pipe(babel, {
         presets: ["es2015"]
     });
+
+var annotateTransforms = lazypipe()
+	.pipe(annotate);
 
 module.exports = {
     bundle: {
@@ -39,7 +43,10 @@ module.exports = {
             scripts: "src/main/**/*.js",
             styles: "src/main/**/*.css",
             options: {
-                rev: false
+            	rev: false,
+				transforms: {
+					scripts: annotateTransforms
+				}
             }
         }
         //,

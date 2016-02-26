@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Config\IocConfig.cs" />
     <Compile Include="Config\RouteConfig.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Startup.cs" />

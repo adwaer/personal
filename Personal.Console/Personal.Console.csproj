@@ -105,6 +105,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>robocopy $(SolutionDir)Personal.Resource\$(OutDir) $(TargetDir) Personal.Resource.dll
+if %25ERRORLEVEL%25 EQU 1 echo OKCOPY &amp; goto :eof</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

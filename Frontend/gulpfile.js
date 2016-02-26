@@ -7,7 +7,6 @@ var del = require("del");
 var notify = require("gulp-notify");
 var path = require("path");
 var uglify = require('gulp-uglify');
-
 // settings
 var destDir = "src/dist";
 var pathPrefix = "src/dist/";
