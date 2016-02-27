@@ -35,6 +35,16 @@ gulp.task("watch-only", function () {
     watchBundles();
 });
 
+
+// default
+gulp.task('watch', ['bundle'], function () {
+    gulp.watch([
+        'src/main/*.js',
+    ], []);
+
+    // gulp.watch('scripts/app/comp/paratype.js').on('change', browserSync.reload);
+});
+
 gulp.task("default", ["bundle"], function () {});
 
 gulp.task('compress', function () {

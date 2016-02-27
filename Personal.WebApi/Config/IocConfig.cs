@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using Autofac;
 using Autofac.Integration.WebApi;
+using Personal.Resource;
+using Personal.Service;
 using Personal.WebApi.Controllers;
 
 namespace Personal.WebApi.Config
@@ -57,7 +59,13 @@ namespace Personal.WebApi.Config
             //    .AsImplementedInterfaces()
             //    .SingleInstance();
 
+            builder
+                .RegisterType<ResourcesService>()
+                .As<IResourcesService>()
+                .SingleInstance();
+
             builder.RegisterApiControllers(Assembly.GetEntryAssembly());
+
             return builder.Build();
         }
     }
