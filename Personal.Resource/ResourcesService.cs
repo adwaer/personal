@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using Personal.Service;
+using Resources;
 
 namespace Personal.Resource
 {
@@ -40,36 +41,27 @@ namespace Personal.Resource
             }
 
             typeName = typeName.Substring(0, typeName.IndexOf(".resources", StringComparison.Ordinal));
-
-            var type = Type.GetType(typeName);
+            var type = GetResourceManager(typeName);
             if (type == null)
             {
                 throw new ArgumentException("Resource not found");
             }
 
-            resourceSet = MakeResourceJson(type);
+            resourceSet = type.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             _resourceDictionary[resourceCache] = resourceSet;
 
             return resourceSet;
-        }
-
-        private static ResourceSet MakeResourceJson(Type type)
-        {
-            PropertyInfo resourceManagerPty = type.GetProperty("ResourceManager");
-            var rm = (ResourceManager)resourceManagerPty.GetValue(null);
-
-            return rm.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-            //var json = JsonConvert.SerializeObject(resourceSet);
-
-            //ResourceDictionary.TryAdd(resourceCache, json);
-
-            //return json;
         }
 
         private static string[] _resourceNames;
         private static string[] GetResourceNames()
         {
             return _resourceNames ?? (_resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames());
+        }
+
+        private static ResourceManager GetResourceManager(string name)
+        {
+            return new ResourceManager(name, typeof(Layout).Assembly);
         }
 
         private class ResourceCache

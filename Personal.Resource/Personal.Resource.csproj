@@ -50,10 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Layout.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Layout.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="ru\Layout.ru.resx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Personal.Service\Personal.Service.csproj">

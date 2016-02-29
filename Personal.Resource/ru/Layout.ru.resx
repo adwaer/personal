@@ -117,22 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplicationName" xml:space="preserve">
-    <value>Adwaer personal</value>
-  </data>
-  <data name="ImAdwaer" xml:space="preserve">
-    <value>I'm Azat from Kazan</value>
-  </data>
-  <data name="ImAdwaer2" xml:space="preserve">
-    <value>A freelance UI/.net wizard as well as a Daydreamer who workes on the Graveyard Shift and sleeps all the day!</value>
-  </data>
   <data name="ImAdwaer3" xml:space="preserve">
-    <value>I develop websites, desktop applications using best practices. I have about ten years of programming experience. Implemented trading system, payment system, health insurance systems, as well as a variety of online stores.</value>
+    <value>Я разрабатываю сайты, десктоп приложения используя лучшие практики. За моими плечами почти десяток лет программирования. Реализовывал трейдинговые системы, платежные системы,системы медицинского страхования, а также и разнообразные интернет-магазины.</value>
   </data>
   <data name="ImAdwaer4" xml:space="preserve">
-    <value>I Love to proud of my projects. I believe that one day I will make something than be proud of the most. When I do something that is popular, you will know my name thanks to this project. In the meantime, I'm looking for.. :)</value>
-  </data>
-  <data name="ToggleNavigation" xml:space="preserve">
-    <value>Toggle navigation</value>
+    <value>Люблю гордится своими проектами. Верю что когда нибудь сделаю то чем буду гордиться больше всего. Когда нибудь я сделаю что то популярное, вы будете знать мое имя благодаря этому проекту. Ну а пока, я в поисках.. :)</value>
   </data>
 </root>

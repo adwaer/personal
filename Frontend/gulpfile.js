@@ -7,6 +7,8 @@ var del = require("del");
 var notify = require("gulp-notify");
 var path = require("path");
 var uglify = require('gulp-uglify');
+var debug = require('gulp-debug');
+
 // settings
 var destDir = "src/dist";
 var pathPrefix = "src/dist/";
@@ -35,16 +37,6 @@ gulp.task("watch-only", function () {
     watchBundles();
 });
 
-
-// default
-gulp.task('watch', ['bundle'], function () {
-    gulp.watch([
-        'src/main/*.js',
-    ], []);
-
-    // gulp.watch('scripts/app/comp/paratype.js').on('change', browserSync.reload);
-});
-
 gulp.task("default", ["bundle"], function () {});
 
 gulp.task('compress', function () {
@@ -53,13 +45,18 @@ gulp.task('compress', function () {
       .pipe(gulp.dest('dist'));
 });
 
+gulp.task("reload-and-notify", function () {
+    //browserSync.reload();
+    gulp.src(".").pipe(notify("bundling finished"));
+});
+
+
 function clean() {
     del(destDir + "/**/*.*");
     gulp.src(".").pipe(notify("cleanup finished"));
 }
-
 function watchBundles() {
-    gulp.watch([destDir + "/*.*", "Views/**/*.cshtml", "Frontend/**/*.html"], ["reload-and-notify"]);
+    gulp.watch([destDir + "/*.*", "src/main/**/*.js", "src/**/*.html"], ["reload-and-notify"]);
 
     var destDirAbsolutePath = path.join(__dirname, destDir);
 

@@ -22,7 +22,7 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Layout {
+    public class Layout {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Personal.Resource.Layout", typeof(Layout).Assembly);
@@ -51,7 +51,7 @@ namespace Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,16 +63,52 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Adwaer personal.
         /// </summary>
-        internal static string ApplicationName {
+        public static string ApplicationName {
             get {
                 return ResourceManager.GetString("ApplicationName", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I&apos;m Azat from Kazan.
+        /// </summary>
+        public static string ImAdwaer {
+            get {
+                return ResourceManager.GetString("ImAdwaer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A freelance UI/.net wizard as well as a Daydreamer who workes on the Graveyard Shift and sleeps all the day!.
+        /// </summary>
+        public static string ImAdwaer2 {
+            get {
+                return ResourceManager.GetString("ImAdwaer2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I develop websites, desktop applications using best practices. I have about ten years of programming experience. Implemented trading system, payment system, health insurance systems, as well as a variety of online stores..
+        /// </summary>
+        public static string ImAdwaer3 {
+            get {
+                return ResourceManager.GetString("ImAdwaer3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I Love to proud of my projects. I believe that one day I will make something than be proud of the most. When I do something that is popular, you will know my name thanks to this project. In the meantime, I&apos;m looking for.. :).
+        /// </summary>
+        public static string ImAdwaer4 {
+            get {
+                return ResourceManager.GetString("ImAdwaer4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle navigation.
         /// </summary>
-        internal static string ToggleNavigation {
+        public static string ToggleNavigation {
             get {
                 return ResourceManager.GetString("ToggleNavigation", resourceCulture);
             }

@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Owin;
 using Personal.WebApi.Config;
 
@@ -32,10 +33,13 @@ namespace Personal.WebApi
             };
 
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
 
             RouteConfig.Register(config);
+
+            app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(config);
         }
     }

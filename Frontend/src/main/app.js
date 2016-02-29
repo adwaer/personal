@@ -2,7 +2,7 @@
 
     window.app = window.angular.module('app',
         [
-            'ngResource', 'ngRoute', 'ui.bootstrap', 'cec.server', 'cec.requests', 'cec.resource'
+            'ngResource', 'ngRoute', 'ui.bootstrap', 'cec.crud', 'cec.resource'
         ])
         .config([
             '$routeProvider', function($routeProvider) {
@@ -11,7 +11,11 @@
                         templateUrl: 'index.html'
                     });
             }
-        ]);
+        ])
+        .config(['$httpProvider', function($httpProvider) {
+            $httpProvider.defaults.useXDomain = true;
+            delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        }]);
 
     window.angular.bootstrap(document, ['app']);
 };

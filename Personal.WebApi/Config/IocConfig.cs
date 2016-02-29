@@ -64,7 +64,7 @@ namespace Personal.WebApi.Config
                 .As<IResourcesService>()
                 .SingleInstance();
 
-            builder.RegisterApiControllers(Assembly.GetEntryAssembly());
+            builder.RegisterApiControllers(Assembly.GetCallingAssembly());
 
             return builder.Build();
         }
