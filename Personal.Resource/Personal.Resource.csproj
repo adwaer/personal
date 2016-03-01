@@ -30,8 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CostEffectiveCode">
+      <HintPath>..\packages\CostEffectiveCode.2.2.0\lib\net45\CostEffectiveCode.dll</HintPath>
+    </Reference>
+    <Reference Include="CostEffectiveCode.EntityFramework6">
+      <HintPath>..\packages\CostEffectiveCode.EntityFramework6.2.2.2\lib\net45\CostEffectiveCode.EntityFramework6.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,7 +58,14 @@
       <DependentUpon>Layout.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DbResourcesService.cs" />
+    <Compile Include="ResourceCache.cs" />
     <Compile Include="ResourcesService.cs" />
+    <Compile Include="ru\Layout.ru-RU.Designer.cs">
+      <DependentUpon>Layout.ru-RU.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Layout.resx">
@@ -54,9 +73,21 @@
       <LastGenOutput>Layout.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="ru\Layout.ru.resx" />
+    <EmbeddedResource Include="ru\Layout.ru-RU.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Layout.ru-RU.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Personal.Domain\Personal.Domain.csproj">
+      <Project>{BEF42A82-8D2F-4D89-AE8F-3F61F03842C4}</Project>
+      <Name>Personal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Personal.Schema\Personal.Schema.csproj">
+      <Project>{6E7EF600-44C2-47F5-BFA0-C2A3C75ACF74}</Project>
+      <Name>Personal.Schema</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Personal.Service\Personal.Service.csproj">
       <Project>{B5537F06-975B-4BB6-9397-0738E092B323}</Project>
       <Name>Personal.Service</Name>

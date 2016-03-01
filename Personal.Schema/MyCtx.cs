@@ -14,5 +14,6 @@ namespace Personal.Schema
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Text> Texts { get; set; }
     }
 }

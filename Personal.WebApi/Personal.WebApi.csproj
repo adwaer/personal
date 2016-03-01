@@ -46,6 +46,17 @@
       <HintPath>..\packages\Autofac.WebApi2.Owin.3.3.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CostEffectiveCode, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CostEffectiveCode.2.2.0\lib\net45\CostEffectiveCode.dll</HintPath>
+    </Reference>
+    <Reference Include="CostEffectiveCode.EntityFramework6">
+      <HintPath>..\packages\CostEffectiveCode.EntityFramework6.2.2.2\lib\net45\CostEffectiveCode.EntityFramework6.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
@@ -100,9 +111,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Personal.Mapping\Personal.Mapping.csproj">
+      <Project>{B4CCCBC7-BBD3-43B0-9AF1-542664650CB8}</Project>
+      <Name>Personal.Mapping</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Personal.Resource\Personal.Resource.csproj">
       <Project>{61F71087-20A8-4403-B83A-774387C315D0}</Project>
       <Name>Personal.Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Personal.Schema\Personal.Schema.csproj">
+      <Project>{6E7EF600-44C2-47F5-BFA0-C2A3C75ACF74}</Project>
+      <Name>Personal.Schema</Name>
     </ProjectReference>
     <ProjectReference Include="..\Personal.Service\Personal.Service.csproj">
       <Project>{B5537F06-975B-4BB6-9397-0738E092B323}</Project>
