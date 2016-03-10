@@ -15,26 +15,29 @@ namespace Personal.Resource
 {
     public class DbResourcesService : IResourcesService
     {
-        private readonly IScope<IQueryFactory> _queryFactory;
-        private readonly ConcurrentDictionary<ResourceCache, IEnumerable> _resourceDictionary;
+        private readonly IQueryFactory _queryFactory;
+        private static readonly ConcurrentDictionary<ResourceCache, IEnumerable> ResourceDictionary;
 
-        public DbResourcesService(IScope<IQueryFactory> queryFactory)
+        static DbResourcesService()
+        {
+            ResourceDictionary = new ConcurrentDictionary<ResourceCache, IEnumerable>();
+        }
+
+        public DbResourcesService(IQueryFactory queryFactory)
         {
             _queryFactory = queryFactory;
-            _resourceDictionary = new ConcurrentDictionary<ResourceCache, IEnumerable>();
         }
 
         public IEnumerable Get(string name)
         {
             var resourceCache = ResourceCache.GetInstance(name);
             IEnumerable resourceSet;
-            if (_resourceDictionary.TryGetValue(resourceCache, out resourceSet))
+            if (ResourceDictionary.TryGetValue(resourceCache, out resourceSet))
             {
                 return resourceSet;
             }
 
             var single = _queryFactory
-                .Instance
                 .GetQuery<Text>()
                 .Where(new ExpressionSpecification<Text>(text => text.Culture == resourceCache.Culture.Name
                                                                  && text.Key == resourceCache.Id))
@@ -53,7 +56,7 @@ namespace Personal.Resource
                     .ToArray();
             }
 
-            _resourceDictionary[resourceCache] = texts;
+            ResourceDictionary[resourceCache] = texts;
             return texts;
         }
     }

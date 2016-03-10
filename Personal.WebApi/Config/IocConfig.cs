@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Reflection;
 using Autofac;
 using Autofac.Integration.WebApi;
@@ -24,10 +25,14 @@ namespace Personal.WebApi.Config
             builder.RegisterType<MyCtx>()
                 .AsSelf()
                 .As<DbContext>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<MyCtx>()
+                .AsSelf()
                 .As<IDataContext>()
                 .As<IUnitOfWork>()
                 .As<ILinqProvider>()
-                .InstancePerLifetimeScope();
+                .InstancePerRequest();
 
             builder.RegisterType<DepencyResolverScope<IUnitOfWork>>()
                 .As<IScope<IUnitOfWork>>()
@@ -37,13 +42,9 @@ namespace Personal.WebApi.Config
                 .As<IScope<IDataContext>>()
                 .SingleInstance();
 
-            builder.RegisterType<DepencyResolverScope<IQueryFactory>>()
-                .As<IScope<IQueryFactory>>()
-                .SingleInstance();
-
             builder.RegisterType<CommandQueryFactory>()
                 .AsImplementedInterfaces()
-                .InstancePerRequest();
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<DependencyResolverDiContainer>()
                 .As<IDiContainer>()
@@ -73,12 +74,18 @@ namespace Personal.WebApi.Config
 
             builder
                 .RegisterType<DbResourcesService>()
-                .As<IResourcesService>()
-                .SingleInstance();
+                .As<IResourcesService>();
+
+            IContainer container = null;
 
             builder.RegisterApiControllers(Assembly.GetCallingAssembly());
 
-            return builder.Build();
+
+            Func<IContainer> factory = () => container;
+            builder.RegisterInstance(factory);
+
+            container = builder.Build();
+            return container;
         }
     }
 }
