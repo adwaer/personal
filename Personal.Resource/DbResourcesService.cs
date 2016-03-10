@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Helpers;
-using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Scope;
+using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using Personal.Domain.Entities;
-using Personal.Schema;
 using Personal.Service;
 
 namespace Personal.Resource
@@ -20,7 +19,7 @@ namespace Personal.Resource
 
         static DbResourcesService()
         {
-            ResourceDictionary = new ConcurrentDictionary<ResourceCache, IEnumerable>();
+            ResourceDictionary = new ConcurrentDictionary<ResourceCache, IEnumerable>(); ;
         }
 
         public DbResourcesService(IQueryFactory queryFactory)
@@ -39,25 +38,25 @@ namespace Personal.Resource
 
             var single = _queryFactory
                 .GetQuery<Text>()
-                .Where(new ExpressionSpecification<Text>(text => text.Culture == resourceCache.Culture.Name
-                                                                 && text.Key == resourceCache.Id))
+                .Where(text => text.Culture == resourceCache.Culture.Name && text.Key == resourceCache.Id)
                 .FirstOrDefault();
 
-            IEnumerable<string> texts;
+            IEnumerable texts;
             if (single == null)
             {
-                texts = new ResourcesService().Get(name)
-                    .Cast<string>()
-                    .ToArray();
+                texts = new ResourcesService()
+                    .Get(name);
             }
             else
             {
-                texts = Json.Decode<IEnumerable<string>>(single.Value)
+                texts = Json.Decode<Dictionary<string, string>>(single.Value)
                     .ToArray();
             }
 
-            ResourceDictionary[resourceCache] = texts;
-            return texts;
+            var enumerable = texts as object[] ?? texts.Cast<object>().ToArray();
+
+            ResourceDictionary[resourceCache] = enumerable;
+            return enumerable;
         }
     }
 }

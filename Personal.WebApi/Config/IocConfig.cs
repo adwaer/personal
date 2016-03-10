@@ -3,12 +3,18 @@ using System.Data.Entity;
 using System.Reflection;
 using Autofac;
 using Autofac.Integration.WebApi;
+using CostEffectiveCode.Autofac;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Logger;
+using CostEffectiveCode.Common.Scope;
 using CostEffectiveCode.Domain.Cqrs;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Cqrs.Queries;
+using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using CostEffectiveCode.EntityFramework6;
+using CostEffectiveCode.NLog;
+using Personal.Domain.Entities;
 using Personal.Mapping;
 using Personal.Resource;
 using Personal.Schema;
@@ -22,34 +28,36 @@ namespace Personal.WebApi.Config
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<MyCtx>()
-                .AsSelf()
-                .As<DbContext>()
-                .InstancePerLifetimeScope();
+            //builder
+            //    .Register(x => Container)
+            //    .As<IDiContainer>()
+            //    .SingleInstance();
 
-            builder.RegisterType<MyCtx>()
-                .AsSelf()
-                .As<IDataContext>()
-                .As<IUnitOfWork>()
-                .As<ILinqProvider>()
-                .InstancePerRequest();
-
-            builder.RegisterType<DepencyResolverScope<IUnitOfWork>>()
-                .As<IScope<IUnitOfWork>>()
-                .SingleInstance();
-
-            builder.RegisterType<DepencyResolverScope<IDataContext>>()
-                .As<IScope<IDataContext>>()
-                .SingleInstance();
-
-            builder.RegisterType<CommandQueryFactory>()
-                .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<DependencyResolverDiContainer>()
+            builder
+                .RegisterType<DependencyResolverDiContainer>()
                 .As<IDiContainer>()
                 .SingleInstance();
 
+            builder.RegisterType<MyCtx>()
+                .AsSelf()
+                .As<DbContext>()
+                .As<IDataContext>()
+                .As<IUnitOfWork>()
+                .As<ILinqProvider>()
+                .InstancePerLifetimeScope();
+
+            //builder.RegisterType<DiContainerScope<IUnitOfWork>>()
+            //    .As<IScope<IUnitOfWork>>()
+            //    .SingleInstance();
+
+            //builder.RegisterType<DiContainerScope<IDataContext>>()
+            //    .As<IScope<IDataContext>>()
+            //    .SingleInstance();
+            
+            builder.RegisterType<CommandQueryFactory>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+            
             builder.RegisterGeneric(typeof(CreateEntityCommand<>))
                 .InstancePerDependency();
 
@@ -59,9 +67,14 @@ namespace Personal.WebApi.Config
             builder.RegisterType<CommitCommand>()
                 .InstancePerDependency();
 
-            builder.RegisterGeneric(typeof(ExpressionQuery<>))
-                .AsImplementedInterfaces()
+            builder
+                .RegisterType<ExpressionQuery<Text>>()
+                .As<IQuery<Text, IExpressionSpecification<Text>>>()
                 .InstancePerDependency();
+
+            builder
+                .RegisterGeneric(typeof(ExpressionSpecification<>))
+                .As(typeof(IExpressionSpecification<>));
 
             builder.RegisterType<NLogLogger>()
                 .As<ILogger>()
@@ -74,18 +87,12 @@ namespace Personal.WebApi.Config
 
             builder
                 .RegisterType<DbResourcesService>()
-                .As<IResourcesService>();
-
-            IContainer container = null;
-
+                .As<IResourcesService>()
+                .InstancePerRequest();
+            
             builder.RegisterApiControllers(Assembly.GetCallingAssembly());
-
-
-            Func<IContainer> factory = () => container;
-            builder.RegisterInstance(factory);
-
-            container = builder.Build();
-            return container;
+            
+            return builder.Build();
         }
     }
 }
