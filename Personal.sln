@@ -50,7 +50,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{634C893C-E425-423B-9ECA-BE35367C05D5}"
 	ProjectSection(SolutionItems) = preProject
 		Frontend\src\dril\img\.DS_Store = Frontend\src\dril\img\.DS_Store
-		Frontend\src\dril\img\after_effects.svg = Frontend\src\dril\img\after_effects.svg
 		Frontend\src\dril\img\amazon.png = Frontend\src\dril\img\amazon.png
 		Frontend\src\dril\img\apple-touch-icon-ipad-retina.png = Frontend\src\dril\img\apple-touch-icon-ipad-retina.png
 		Frontend\src\dril\img\apple-touch-icon-ipad.png = Frontend\src\dril\img\apple-touch-icon-ipad.png
@@ -62,13 +61,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{634C893C-E42
 		Frontend\src\dril\img\elance-odesk.png = Frontend\src\dril\img\elance-odesk.png
 		Frontend\src\dril\img\eric.png = Frontend\src\dril\img\eric.png
 		Frontend\src\dril\img\favicon.png = Frontend\src\dril\img\favicon.png
-		Frontend\src\dril\img\flash.svg = Frontend\src\dril\img\flash.svg
 		Frontend\src\dril\img\hero-img.png = Frontend\src\dril\img\hero-img.png
 		Frontend\src\dril\img\icon.png = Frontend\src\dril\img\icon.png
-		Frontend\src\dril\img\illustrator.svg = Frontend\src\dril\img\illustrator.svg
-		Frontend\src\dril\img\indesign.svg = Frontend\src\dril\img\indesign.svg
 		Frontend\src\dril\img\payoneer.png = Frontend\src\dril\img\payoneer.png
-		Frontend\src\dril\img\photoshop.svg = Frontend\src\dril\img\photoshop.svg
 		Frontend\src\dril\img\ramil.jpg = Frontend\src\dril\img\ramil.jpg
 		Frontend\src\dril\img\s1.png = Frontend\src\dril\img\s1.png
 		Frontend\src\dril\img\s2.png = Frontend\src\dril\img\s2.png
@@ -77,7 +72,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{634C893C-E42
 		Frontend\src\dril\img\s5.png = Frontend\src\dril\img\s5.png
 		Frontend\src\dril\img\s6.png = Frontend\src\dril\img\s6.png
 		Frontend\src\dril\img\trianglify-background.svg = Frontend\src\dril\img\trianglify-background.svg
+		Frontend\src\dril\img\tsql.png = Frontend\src\dril\img\tsql.png
 		Frontend\src\dril\img\user.png = Frontend\src\dril\img\user.png
+		Frontend\src\dril\img\vs.png = Frontend\src\dril\img\vs.png
+		Frontend\src\dril\img\webstorm.png = Frontend\src\dril\img\webstorm.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{EE642A2C-F0A8-42D1-9984-70E3B77D181A}"
@@ -112,6 +110,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal.Resource", "Personal.Resource\Personal.Resource.csproj", "{61F71087-20A8-4403-B83A-774387C315D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal.Service", "Personal.Service\Personal.Service.csproj", "{B5537F06-975B-4BB6-9397-0738E092B323}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityModel.Owin.BasicAuthentication", "IdentityModel.Owin.BasicAuthentication\IdentityModel.Owin.BasicAuthentication.csproj", "{46FF27D2-98CB-4A12-9712-A8A00B36479C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +151,10 @@ Global
 		{B5537F06-975B-4BB6-9397-0738E092B323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5537F06-975B-4BB6-9397-0738E092B323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5537F06-975B-4BB6-9397-0738E092B323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FF27D2-98CB-4A12-9712-A8A00B36479C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF27D2-98CB-4A12-9712-A8A00B36479C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FF27D2-98CB-4A12-9712-A8A00B36479C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FF27D2-98CB-4A12-9712-A8A00B36479C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,5 +176,6 @@ Global
 		{138ED0B2-F562-488E-980E-23DDC9617C1F} = {0327DE0E-CF81-4F5A-9643-ED32F9587BF2}
 		{61F71087-20A8-4403-B83A-774387C315D0} = {CCF1E993-2A34-4531-A3D9-53A97C2AE7B7}
 		{B5537F06-975B-4BB6-9397-0738E092B323} = {63FD3403-CE1B-443E-8026-23EE924D3B3F}
+		{46FF27D2-98CB-4A12-9712-A8A00B36479C} = {DC95B12F-9789-4585-A910-05307D7172AA}
 	EndGlobalSection
 EndGlobal

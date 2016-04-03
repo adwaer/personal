@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
+using Personal.Domain.Entities;
 
 namespace Personal.Resource
 {
     public class ResourceCache
     {
-        public readonly CultureInfo Culture;
-        public readonly string Id;
+        private readonly CultureInfo _culture;
+        private readonly string _id;
 
         private ResourceCache(string id, CultureInfo culture)
         {
-            Culture = culture;
-            Id = id;
+            _culture = culture;
+            _id = id;
         }
 
         public static ResourceCache GetInstance(string id)
@@ -25,8 +23,11 @@ namespace Personal.Resource
 
         private bool Equals(ResourceCache other)
         {
-            return Equals(Culture, other.Culture) && string.Equals(Id, other.Id);
+            return Equals(_culture, other._culture) && string.Equals(_id, other._id);
         }
+
+        public Expression<Func<Text, bool>> SearchPattern =>
+            text => text.Culture == _culture.Name && text.Key == _id;
 
         public override bool Equals(object obj)
         {
@@ -40,7 +41,7 @@ namespace Personal.Resource
         {
             unchecked
             {
-                return ((Culture?.GetHashCode() ?? 0) * 397) ^ (Id?.GetHashCode() ?? 0);
+                return ((_culture?.GetHashCode() ?? 0) * 397) ^ (_id?.GetHashCode() ?? 0);
             }
         }
     }

@@ -23,6 +23,11 @@ namespace Personal.Resource
             return GetResourceSet(name);
         }
 
+        public void Update(string key, string value)
+        {
+            throw new NotImplementedException();
+        }
+
         public ResourceSet GetResourceSet(string id)
         {
             var resourceCache = ResourceCache.GetInstance(id);

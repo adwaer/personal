@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CostEffectiveCode.Domain.Ddd.Entities;
+﻿using CostEffectiveCode.Domain.Ddd.Entities;
 
 namespace Personal.Domain.Entities
 {

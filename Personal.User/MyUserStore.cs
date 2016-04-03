@@ -5,7 +5,7 @@ using Personal.Domain.Entities;
 
 namespace Personal.User
 {
-    public class MyUserStore : UserStore<Customer, IdentityRole<int, IdentityUserRole<int>>, int, IdentityUserLogin<int>, IdentityUserRole<int>, IdentityUserClaim<int>>
+    public class MyUserStore : UserStore<Customer, Role, int, IdentityUserLogin<int>, UserRole, Claim>
     {
         public MyUserStore(DbContext ctx) : base(ctx) { }
 
@@ -56,5 +56,6 @@ namespace Personal.User
         {
             return await Context.Set<Customer>().FirstOrDefaultAsync(u => Equals(u.UserName, userName));
         }
+
     }
 }

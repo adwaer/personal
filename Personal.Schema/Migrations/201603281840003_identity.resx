@@ -117,22 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplicationName" xml:space="preserve">
-    <value>Adwaer personal</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
-  <data name="ImAdwaer" xml:space="preserve">
-    <value>I'm Azat from Kazan</value>
-  </data>
-  <data name="ImAdwaer2" xml:space="preserve">
-    <value>A freelance UI/.net wizard as well as a Daydreamer who workes on the Graveyard Shift and sleeps all the day!</value>
-  </data>
-  <data name="ImAdwaer3" xml:space="preserve">
-    <value>I develop websites, desktop applications using best practices. I have about ten years of programming experience. Implemented trading system, payment system, health insurance systems, as well as a variety of online stores.</value>
-  </data>
-  <data name="ImAdwaer4" xml:space="preserve">
-    <value>I Love to proud of my projects. I believe that one day I will make something than be proud of the most. When I do something that is popular, you will know my name thanks to this project. In the meantime, I'm looking for.. :)</value>
-  </data>
-  <data name="ToggleNavigation" xml:space="preserve">
-    <value>Toggle navigation</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

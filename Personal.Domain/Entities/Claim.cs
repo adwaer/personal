@@ -3,8 +3,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Personal.Domain.Entities
 {
-    public class Customer : IdentityUser<int, IdentityUserLogin<int>, UserRole, Claim>, IEntityBase<int>
+    public class Claim: IdentityUserClaim<int>, IEntityBase<int>
     {
+        public Customer User { get; set; }
         public string GetId()
         {
             return Id.ToString();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Reflection;
+using System.Web;
 using Autofac;
 using Autofac.Integration.WebApi;
 using CostEffectiveCode.Autofac;
@@ -14,11 +15,18 @@ using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.NLog;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using Personal.Domain;
 using Personal.Domain.Entities;
 using Personal.Mapping;
 using Personal.Resource;
 using Personal.Schema;
 using Personal.Service;
+using Personal.User;
+using System.Net;
 
 namespace Personal.WebApi.Config
 {
@@ -53,11 +61,11 @@ namespace Personal.WebApi.Config
             //builder.RegisterType<DiContainerScope<IDataContext>>()
             //    .As<IScope<IDataContext>>()
             //    .SingleInstance();
-            
+
             builder.RegisterType<CommandQueryFactory>()
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
-            
+
             builder.RegisterGeneric(typeof(CreateEntityCommand<>))
                 .InstancePerDependency();
 
@@ -67,14 +75,6 @@ namespace Personal.WebApi.Config
             builder.RegisterType<CommitCommand>()
                 .InstancePerDependency();
 
-            builder
-                .RegisterType<ExpressionQuery<Text>>()
-                .As<IQuery<Text, IExpressionSpecification<Text>>>()
-                .InstancePerDependency();
-
-            builder
-                .RegisterGeneric(typeof(ExpressionSpecification<>))
-                .As(typeof(IExpressionSpecification<>));
 
             builder.RegisterType<NLogLogger>()
                 .As<ILogger>()
@@ -85,13 +85,31 @@ namespace Personal.WebApi.Config
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
+            builder.RegisterType<SignInManager<Customer, int>>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<MyUserManager>()
+                    .As<UserManager<Customer, int>>()
+                    .InstancePerLifetimeScope();
+
+            builder.RegisterType<MyUserStore>()
+                    .As<IUserStore<Customer, int>>()
+                    .InstancePerLifetimeScope();
+            
+            CqrsIocConfig.Configure(builder);
+
+            builder
+                .RegisterGeneric(typeof(ExpressionSpecification<>))
+                .As(typeof(IExpressionSpecification<>));
+
             builder
                 .RegisterType<DbResourcesService>()
                 .As<IResourcesService>()
                 .InstancePerRequest();
-            
+
             builder.RegisterApiControllers(Assembly.GetCallingAssembly());
-            
+
             return builder.Build();
         }
     }

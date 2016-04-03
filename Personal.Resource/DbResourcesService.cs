@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Helpers;
 using CostEffectiveCode.Common.Scope;
 using CostEffectiveCode.Domain;
+using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using Personal.Domain.Entities;
@@ -15,6 +16,7 @@ namespace Personal.Resource
     public class DbResourcesService : IResourcesService
     {
         private readonly IQueryFactory _queryFactory;
+        private readonly ICommandFactory _commandFactory;
         private static readonly ConcurrentDictionary<ResourceCache, IEnumerable> ResourceDictionary;
 
         static DbResourcesService()
@@ -22,9 +24,10 @@ namespace Personal.Resource
             ResourceDictionary = new ConcurrentDictionary<ResourceCache, IEnumerable>(); ;
         }
 
-        public DbResourcesService(IQueryFactory queryFactory)
+        public DbResourcesService(IQueryFactory queryFactory, ICommandFactory commandFactory)
         {
             _queryFactory = queryFactory;
+            _commandFactory = commandFactory;
         }
 
         public IEnumerable Get(string name)
@@ -38,7 +41,7 @@ namespace Personal.Resource
 
             var single = _queryFactory
                 .GetQuery<Text>()
-                .Where(text => text.Culture == resourceCache.Culture.Name && text.Key == resourceCache.Id)
+                .Where(resourceCache.SearchPattern)
                 .FirstOrDefault();
 
             IEnumerable texts;
@@ -57,6 +60,19 @@ namespace Personal.Resource
 
             ResourceDictionary[resourceCache] = enumerable;
             return enumerable;
+        }
+
+        public void Update(string key, string value)
+        {
+            var text = _queryFactory
+                .GetQuery<Text>()
+                .Where(ResourceCache.GetInstance(key).SearchPattern)
+                .Single();
+
+            text.Value = value;
+
+            var command = _commandFactory.GetCommitCommand();
+            command.Execute();
         }
     }
 }
