@@ -1,25 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Security.Claims;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin;
-using Microsoft.Owin.Security;
-using Personal.Domain.Entities;
+using Personal.User;
 
 namespace Personal.WebApi.Controllers
 {
     public class CustomerController : ApiController
     {
-        private readonly UserManager<Customer, int> _userManager;
-
-        public CustomerController(UserManager<Customer, int> userManager)
+        private readonly IAuthManager _authManager;
+        public CustomerController(IAuthManager authManager)
         {
-            _userManager = userManager;
+            _authManager = authManager;
         }
 
         public async Task<IHttpActionResult> Get()
@@ -39,11 +32,8 @@ namespace Personal.WebApi.Controllers
                 }
             }
 
-            var customer = await _userManager.FindAsync(login, password);
-            if (customer != null)
+            if (await _authManager.ValidateAsync(login, password))
             {
-                var identity = await _userManager.CreateIdentityAsync(customer, DefaultAuthenticationTypes.ApplicationCookie);
-                Thread.CurrentPrincipal = new ClaimsPrincipal(identity);
                 return Ok();
             }
 

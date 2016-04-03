@@ -16,7 +16,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityModel.Owin.BasicAuthentication;
 
-[assembly: OwinStartup(typeof(Personal.WebApi.Startup))]
 namespace Personal.WebApi
 {
     public class Startup
@@ -31,14 +30,12 @@ namespace Personal.WebApi
             ConfigureApp(container, app);
             ConfigureAuth(app);
 
-
             app.Run(context =>
             {
                 context.Response.ContentType = "text/plain";
                 return context.Response.WriteAsync("Service is online.");
             });
         }
-
 
         private void ConfigureApp(IContainer container, IAppBuilder app)
         {

@@ -45,7 +45,9 @@ namespace Personal.User
         /// <returns/>
         public override async Task<Customer> FindByIdAsync(int userId)
         {
-            return await Context.Set<Customer>().FirstOrDefaultAsync(u => u.Id == userId);
+            return await Context
+                .Set<Customer>()
+                .FirstOrDefaultAsync(u => u.Id == userId);
         }
         /// <summary>
         /// Find a user by name
@@ -54,7 +56,9 @@ namespace Personal.User
         /// <returns/>
         public override async Task<Customer> FindByNameAsync(string userName)
         {
-            return await Context.Set<Customer>().FirstOrDefaultAsync(u => Equals(u.UserName, userName));
+            return await Context
+                .Set<Customer>()
+                .FirstOrDefaultAsync(u => Equals(u.UserName, userName));
         }
 
     }

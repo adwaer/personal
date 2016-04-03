@@ -96,7 +96,11 @@ namespace Personal.WebApi.Config
             builder.RegisterType<MyUserStore>()
                     .As<IUserStore<Customer, int>>()
                     .InstancePerLifetimeScope();
-            
+
+            builder.RegisterType<AuthManager>()
+                    .As<IAuthManager>()
+                    .InstancePerLifetimeScope();
+
             CqrsIocConfig.Configure(builder);
 
             builder

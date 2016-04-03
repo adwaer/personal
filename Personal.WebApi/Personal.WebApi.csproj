@@ -151,6 +151,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute\AuthAttribute.cs" />
     <Compile Include="Config\DependencyResolverDiContainer.cs" />
     <Compile Include="Config\IocConfig.cs" />
     <Compile Include="Config\RouteConfig.cs" />
