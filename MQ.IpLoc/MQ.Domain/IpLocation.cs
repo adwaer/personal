@@ -29,5 +29,10 @@ namespace MQ.Domain
                 Index = reader.ReadUInt32()
             };
         }
+
+        public override string ToString()
+        {
+            return $"{FromIp} {ToIp} {Index}";
+        }
     }
 }

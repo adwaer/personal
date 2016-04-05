@@ -1,40 +1,32 @@
 ﻿using System;
+using System.CodeDom;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using MQ.Cqrs.Impl;
 using MQ.Domain;
 
 namespace MQ.IpLoc
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            DateTime start1 = DateTime.Now;
             DateTime start = DateTime.Now;
-            using (var stream = File.OpenRead("geobase.dat"))
-            using (var reader = new BinaryReader(stream))
-            {
-                var header = Header.Get(reader);
 
-                IpLocation[] ipLocations = new IpLocation[header.RecordCount];
-                for (uint i = 0; i < header.RecordCount; i++)
-                {
-                    ipLocations[i] = IpLocation.Get(reader);
-                }
+            //using (var stream = File.OpenRead("geobase.dat"))
+            //{
+            //    Helpers.WriteLog(ref start, "read");
+                //DbReadMethods.ReadByMethods(ref start); // 400 ms
+                //DbReadMethods.ReadByQuery(ref start); // 500 ms
+            //}
+            DbReadMethods.ReadUnsafe(ref start); // ??? ms
 
-                Location[] locations = new Location[header.RecordCount];
-                for (int i = 0; i < header.RecordCount; i++)
-                {
-                    locations[i] = Location.Get(reader);
-                }
 
-                for (int i = 0; i < header.RecordCount; i++)
-                {
-                    
-                }
-
-            }
-
-            Console.WriteLine($"Spent time: {DateTime.Now - start}");
+            Helpers.WriteLog(ref start1, "spent");
             Console.ReadLine();
         }
+
     }
 }
