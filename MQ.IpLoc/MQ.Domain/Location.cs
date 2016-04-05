@@ -35,18 +35,22 @@ namespace MQ.Domain
         /// долгота
         /// </summary>
         public float Lon { get; private set; }
+        public float Lon1 { get; private set; }
+        public float La1 { get; private set; }
 
         public static Location Get(BinaryReader reader)
         {
             return new Location
             {
-                Country = EnvironmentConstant.GetStringFromSbyte(reader, 8),
-                Region = EnvironmentConstant.GetStringFromSbyte(reader, 12),
-                Postal = EnvironmentConstant.GetStringFromSbyte(reader, 12),
-                City = EnvironmentConstant.GetStringFromSbyte(reader, 24),
-                Company = EnvironmentConstant.GetStringFromSbyte(reader, 32),
-                Lat = EnvironmentConstant.ReadFloat(reader),
-                Lon = EnvironmentConstant.ReadFloat(reader)
+                Country = EnvironmentConstant.ReadString(reader, 8),
+                Region = EnvironmentConstant.ReadString(reader, 12),
+                Postal = EnvironmentConstant.ReadString(reader, 12),
+                City = EnvironmentConstant.ReadString(reader, 24),
+                Company = EnvironmentConstant.ReadString(reader, 32),
+                Lat = reader.ReadSingle(),
+                Lon = reader.ReadSingle()
+                Lat1 = reader.ReadSingle(),
+                Lon1 = reader.ReadSingle()
             };
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using MQ.Domain;
 
@@ -9,6 +8,7 @@ namespace MQ.IpLoc
     {
         static void Main(string[] args)
         {
+            DateTime start = DateTime.Now;
             using (var stream = File.OpenRead("geobase.dat"))
             using (var reader = new BinaryReader(stream))
             {
@@ -25,8 +25,15 @@ namespace MQ.IpLoc
                 {
                     locations[i] = Location.Get(reader);
                 }
+
+                for (int i = 0; i < header.RecordCount; i++)
+                {
+                    
+                }
+
             }
 
+            Console.WriteLine($"Spent time: {DateTime.Now - start}");
             Console.ReadLine();
         }
     }
