@@ -15,13 +15,6 @@ namespace MQ.Domain
                 .GetString(reader.ReadBytes(count))
                 .TrimEnd(EmptySpace);
         }
-
-        public static float ReadFloat(BinaryReader reader)
-        {
-            var bytes = reader.ReadBytes(4);
-            Array.Reverse(bytes);
-
-            return BitConverter.ToSingle(bytes, 0);
-        }
+        
     }
 }

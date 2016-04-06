@@ -10,15 +10,15 @@ namespace MQ.Domain
         /// <summary>
         /// начало диапозона IP адресов
         /// </summary>
-        public ulong FromIp { get; private set; }
+        public ulong FromIp { get; set; }
         /// <summary>
         /// конец диапозона IP адресов
         /// </summary>
-        public ulong ToIp { get; private set; }
+        public ulong ToIp { get; set; }
         /// <summary>
         /// индекс записи о местоположении
         /// </summary>
-        public uint Index { get; private set; }
+        public uint Index { get; set; }
 
         public static IpLocation Get(BinaryReader reader)
         {

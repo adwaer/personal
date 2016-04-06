@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4C8D5FEC-52B1-45AF-B239-20EA3561ED9A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{5E889592-5B16-4022-ACCF-EA7E92DE30B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MQ.IpLoc</RootNamespace>
-    <AssemblyName>MQ.IpLoc</AssemblyName>
+    <RootNamespace>MQ.Business</RootNamespace>
+    <AssemblyName>MQ.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,10 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,28 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbReadMethods.cs" />
-    <Compile Include="Helpers.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Factory\HeaderFactory.cs" />
+    <Compile Include="Factory\IEntityFactory.cs" />
+    <Compile Include="Factory\IpLocationFactory.cs" />
+    <Compile Include="Factory\LocationFactory.cs" />
+    <Compile Include="IBinaryReader.cs" />
+    <Compile Include="ManagedReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnsafeFileReader.cs" />
+    <Compile Include="UnmanagedReader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="geobase.dat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MQ.Cqrs\MQ.Cqrs.csproj">
-      <Project>{DBC4E306-9F61-4008-8885-5A39B2EB3777}</Project>
-      <Name>MQ.Cqrs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">
-      <Project>{4b9a581a-2737-4a2a-9bfd-a8ab749ed2f0}</Project>
+      <Project>{4B9A581A-2737-4A2A-9BFD-A8AB749ED2F0}</Project>
       <Name>MQ.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MQ.IpLoc\MQ.IpLoc.csproj">
+      <Project>{4C8D5FEC-52B1-45AF-B239-20EA3561ED9A}</Project>
+      <Name>MQ.IpLoc</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

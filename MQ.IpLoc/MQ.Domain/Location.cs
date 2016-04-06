@@ -10,31 +10,31 @@ namespace MQ.Domain
         /// <summary>
         /// название страны (случайная строка с префиксом "cou_")
         /// </summary>
-        public string Country { get; private set; }
+        public string Country { get; set; }
         /// <summary>
         /// название области (случайная строка с префиксом "reg_")
         /// </summary>
-        public string Region { get; private set; }
+        public string Region { get; set; }
         /// <summary>
         /// почтовый индекс (случайная строка с префиксом "pos_")
         /// </summary>
-        public string Postal { get; private set; }
+        public string Postal { get; set; }
         /// <summary>
         /// название города (случайная строка с префиксом "cit_")
         /// </summary>
-        public string City { get; private set; }
+        public string City { get; set; }
         /// <summary>
         /// название организации (случайная строка с префиксом "org_")
         /// </summary>
-        public string Company { get; private set; }
+        public string Company { get; set; }
         /// <summary>
         /// широта
         /// </summary>
-        public float Lat { get; private set; }
+        public float Lat { get; set; }
         /// <summary>
         /// долгота
         /// </summary>
-        public float Lon { get; private set; }
+        public float Lon { get; set; }
 
         public static Location Get(BinaryReader reader)
         {
