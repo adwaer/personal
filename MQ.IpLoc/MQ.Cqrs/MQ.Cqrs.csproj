@@ -44,10 +44,6 @@
     <Compile Include="Factory\IEntityFactory.cs" />
     <Compile Include="Factory\IpLocationFactory.cs" />
     <Compile Include="Factory\LocationFactory.cs" />
-    <Compile Include="Impl\IndexQuery.cs" />
-    <Compile Include="Impl\LocationQuery.cs" />
-    <Compile Include="Impl\IpLocationQuery.cs" />
-    <Compile Include="Impl\HeaderFileQuery.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

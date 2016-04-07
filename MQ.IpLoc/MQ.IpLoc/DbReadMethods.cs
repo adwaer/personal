@@ -1,9 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.IO.MemoryMappedFiles;
 using MQ.Business;
 using MQ.Cqrs.Factory;
-using MQ.Cqrs.Impl;
 using MQ.Domain;
 
 namespace MQ.IpLoc
@@ -11,107 +9,50 @@ namespace MQ.IpLoc
     internal class DbReadMethods
     {
         private const string FilePath = "geobase.dat";
-        public static void ReadByQuery(ref DateTime start)
+
+        public static async void ReadUnsafe()
         {
-            Helpers.WriteLog(ref start, "read");
+            DateTime start = DateTime.Now;
 
-            using (var stream = File.OpenRead(FilePath))
-            {
-                Header header;
-                using (BinaryReader reader = new BinaryReader(Helpers.CloneStream(stream, 60)))
-                {
-                    header = Header.Get(reader);
-                }
-                
-                using (BinaryReader reader = new BinaryReader(Helpers.CloneStream(stream, 20 * header.RecordCount)))
-                {
-                    var ipLocations = new IpLocationQuery()
-                        .Execute(new ManagedReader(reader), header.RecordCount);
-                }
-                
-                using (BinaryReader reader = new BinaryReader(Helpers.CloneStream(stream, 96 * header.RecordCount)))
-                {
-                    var locations = new LocationQuery()
-                        .Execute(new ManagedReader(reader), header.RecordCount);
-                }
-                
-                using (BinaryReader reader = new BinaryReader(Helpers.CloneStream(stream, 4 * header.RecordCount)))
-                {
-                    var indexes = new IndexQuery()
-                        .Execute(new ManagedReader(reader), header.RecordCount);
-                }
-            }
-        }
-
-        public static void ReadByMethods(ref DateTime start)
-        {
-            Helpers.WriteLog(ref start, "read");
-            using (var stream = File.OpenRead(FilePath))
-            {
-                using (BinaryReader reader = new BinaryReader(stream))
-                {
-                    IBinaryReader binaryReader = new ManagedReader(reader);
-
-                    var header = GetHeader(binaryReader);
-                    var ipLocations = GetIpLocation(binaryReader, header.RecordCount);
-                    var locations = GetLocation(binaryReader, header.RecordCount);
-                    var indexes = GetIndexes(binaryReader, header.RecordCount);
-                }
-            }
-        }
-
-        public static void ReadUnsafe(ref DateTime start)
-        {
-            Helpers.WriteLog(ref start, "read");
             MemoryMappedFile mmf = MemoryMappedFile.CreateFromFile(FilePath);
             MemoryMappedViewStream stream = mmf.CreateViewStream();
 
+            Helpers.WriteLog(ref start, "stream");
+
             IBinaryReader binaryReader = new UnmanagedReader(stream);
 
-            var header = GetHeader(binaryReader);
-            var ipLocations = GetIpLocation(binaryReader, header.RecordCount);
-            var locations = GetLocation(binaryReader, header.RecordCount);
-            var indexes = GetIndexes(binaryReader, header.RecordCount);
-        }
+            Helpers.WriteLog(ref start, "reader");
 
-        private static Header GetHeader(IBinaryReader reader)
-        {
-            var factory = new HeaderFactory();
-            return factory.Get(reader);
-        }
-        private static IpLocation[] GetIpLocation(IBinaryReader reader, int recordCount)
-        {
+            // header
+            var header = await new HeaderFactory()
+                .Get(binaryReader);
+            Helpers.WriteLog(ref start, "header");
+
+            // ip locations
             IpLocationFactory factory = new IpLocationFactory();
-
-            IpLocation[] ipLocations = new IpLocation[recordCount];
-            for (uint i = 0; i < recordCount; i++)
+            var ipLocations = new IpLocation[header.RecordCount];
+            for (uint i = 0; i < header.RecordCount; i++)
             {
-                ipLocations[i] = factory.Get(reader);
+                ipLocations[i] = await factory.Get(binaryReader);
             }
+            Helpers.WriteLog(ref start, "ip locations");
 
-            return ipLocations;
-        }
-        private static Location[] GetLocation(IBinaryReader reader, int recordCount)
-        {
-            LocationFactory factory = new LocationFactory();
+            LocationFactory locationFactory = new LocationFactory();
 
-            Location[] locations = new Location[recordCount];
-            for (int i = 0; i < recordCount; i++)
+            Location[] locations = new Location[header.RecordCount];
+            for (int i = 0; i < header.RecordCount; i++)
             {
-                locations[i] = factory.Get(reader);
+                locations[i] = await locationFactory.Get(binaryReader);
             }
+            Helpers.WriteLog(ref start, "locations");
 
-            return locations;
-        }
-        private static float[] GetIndexes(IBinaryReader reader, int recordCount)
-        {
-            float[] indexes = new float[recordCount];
-            for (int i = 0; i < recordCount; i++)
+            float[] indexes = new float[header.RecordCount];
+            for (int i = 0; i < header.RecordCount; i++)
             {
-                indexes[i] = reader.ReadInt32();
+                indexes[i] = binaryReader.ReadInt32();
             }
-
-            return indexes;
+            Helpers.WriteLog(ref start, "indexes");
         }
+        
     }
 }

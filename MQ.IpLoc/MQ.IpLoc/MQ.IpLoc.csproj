@@ -68,10 +68,6 @@
       <Project>{4b9a581a-2737-4a2a-9bfd-a8ab749ed2f0}</Project>
       <Name>MQ.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MQ.Unsafe\MQ.Unsafe.csproj">
-      <Project>{1FCFF15A-73D0-4828-8087-D68EC5AC810C}</Project>
-      <Name>MQ.Unsafe</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

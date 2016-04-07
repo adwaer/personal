@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MQ.Business
 {
     public interface IBinaryReader
     {
         int ReadInt32();
-        uint ReadUInt32();
-        ulong ReadUInt64();
-        float ReadFloat();
-        DateTime ReadDateTime();
-        string ReadString(int count, Encoding encoding = null);
+        Task<uint> ReadUInt32();
+        Task<ulong> ReadUInt64();
+        Task<float> ReadFloat();
+        Task<DateTime> ReadDateTime();
+        Task<string> ReadString(int count, Encoding encoding = null);
     }
 }

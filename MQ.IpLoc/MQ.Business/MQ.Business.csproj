@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBinaryReader.cs" />
-    <Compile Include="ManagedReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnmanagedReader.cs" />
   </ItemGroup>
@@ -50,10 +49,6 @@
     <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">
       <Project>{4B9A581A-2737-4A2A-9BFD-A8AB749ED2F0}</Project>
       <Name>MQ.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MQ.Unsafe\MQ.Unsafe.csproj">
-      <Project>{1FCFF15A-73D0-4828-8087-D68EC5AC810C}</Project>
-      <Name>MQ.Unsafe</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

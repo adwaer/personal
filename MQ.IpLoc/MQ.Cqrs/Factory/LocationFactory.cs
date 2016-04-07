@@ -1,21 +1,22 @@
-﻿using MQ.Business;
+﻿using System.Threading.Tasks;
+using MQ.Business;
 using MQ.Domain;
 
 namespace MQ.Cqrs.Factory
 {
-    public class LocationFactory : IEntityFactory<Location>
+    public class LocationFactory : IEntityFactory<Task<Location>>
     {
-        public Location Get(IBinaryReader reader)
+        public async Task<Location> Get(IBinaryReader reader)
         {
             return new Location
             {
-                Country = reader.ReadString(8),
-                Region = reader.ReadString(12),
-                Postal = reader.ReadString(12),
-                City = reader.ReadString(24),
-                Company = reader.ReadString(32),
-                Lat = reader.ReadFloat(),
-                Lon = reader.ReadFloat()
+                Country = await reader.ReadString(8),
+                Region = await reader.ReadString(12),
+                Postal = await reader.ReadString(12),
+                City = await reader.ReadString(24),
+                Company = await reader.ReadString(32),
+                Lat = await reader.ReadFloat(),
+                Lon = await reader.ReadFloat()
             };
         }
     }

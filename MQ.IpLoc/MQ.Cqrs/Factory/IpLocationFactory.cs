@@ -1,17 +1,18 @@
-﻿using MQ.Business;
+﻿using System.Threading.Tasks;
+using MQ.Business;
 using MQ.Domain;
 
 namespace MQ.Cqrs.Factory
 {
-    public class IpLocationFactory : IEntityFactory<IpLocation>
+    public class IpLocationFactory : IEntityFactory<Task<IpLocation>>
     {
-        public IpLocation Get(IBinaryReader reader)
+        public async Task<IpLocation> Get(IBinaryReader reader)
         {
             return new IpLocation
             {
-                FromIp = reader.ReadUInt64(),
-                ToIp = reader.ReadUInt64(),
-                Index = reader.ReadUInt32()
+                FromIp = await reader.ReadUInt64(),
+                ToIp = await reader.ReadUInt64(),
+                Index = await reader.ReadUInt32()
             };
         }
     }

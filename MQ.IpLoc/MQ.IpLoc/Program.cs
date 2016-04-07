@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.IO.MemoryMappedFiles;
 using MQ.Business;
 using MQ.Cqrs.Factory;
@@ -13,7 +12,6 @@ namespace MQ.IpLoc
         private static void Main(string[] args)
         {
             DateTime start1 = DateTime.Now;
-            DateTime start = DateTime.Now;
 
             //using (var stream = File.OpenRead("geobase.dat"))
             //{
@@ -21,46 +19,8 @@ namespace MQ.IpLoc
             //DbReadMethods.ReadByMethods(ref start); // 400 ms
             //DbReadMethods.ReadByQuery(ref start); // 500 ms
             //}
-            WriteLog(ref start, "stage");
-            //DbReadMethods.ReadUnsafe(ref start); // ??? ms
-
-            MemoryMappedFile mmf = MemoryMappedFile.CreateFromFile(FilePath);
-            MemoryMappedViewStream stream = mmf.CreateViewStream();
-
-            WriteLog(ref start, "stream");
-
-            IBinaryReader binaryReader = new UnmanagedReader(stream);
-
-            WriteLog(ref start, "reader");
-
-            // header
-            var header = new HeaderFactory().Get(binaryReader);
-            WriteLog(ref start, "header");
-
-            // ip locations
-            IpLocationFactory factory = new IpLocationFactory();
-            var ipLocations = new IpLocation[header.RecordCount];
-            for (uint i = 0; i < header.RecordCount; i++)
-            {
-                ipLocations[i] = factory.Get(binaryReader);
-            }
-            WriteLog(ref start, "ip locations");
-
-            LocationFactory locationFactory = new LocationFactory();
-
-            Location[] locations = new Location[header.RecordCount];
-            for (int i = 0; i < header.RecordCount; i++)
-            {
-                locations[i] = locationFactory.Get(binaryReader);
-            }
-            WriteLog(ref start, "locations");
-
-            float[] indexes = new float[header.RecordCount];
-            for (int i = 0; i < header.RecordCount; i++)
-            {
-                indexes[i] = binaryReader.ReadInt32();
-            }
-            WriteLog(ref start, "indexes");
+            
+            DbReadMethods.ReadUnsafe(); // ??? ms
 
             WriteLog(ref start1, "spent");
             Console.ReadLine();

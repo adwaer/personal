@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using MQ.Domain;
 
 namespace MQ.Business
@@ -17,58 +19,62 @@ namespace MQ.Business
         private const int Four = 4;
         private const int Eight = 8;
 
-        public int ReadInt32()
+        public unsafe int ReadInt32()
         {
             var buffer = new byte[Four];
-            _stream.Read(buffer, 0, Four);
+            var ptr = Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0);
+            return Marshal.ReadInt32(ptr, 0);
 
-            return BitConverter.ToInt32(buffer, 0);
+
+            //await _stream.ReadAsync(buffer, 0, Four);
+
+            //return BitConverter.ToInt32(buffer, 0);
         }
 
-        public long ReadInt64()
+        public async Task<long> ReadInt64()
         {
             var buffer = new byte[Eight];
-            _stream.Read(buffer, 0, Eight);
+            await _stream.ReadAsync(buffer, 0, Eight);
 
             return BitConverter.ToInt64(buffer, 0);
         }
 
-        public uint ReadUInt32()
+        public async Task<uint> ReadUInt32()
         {
             var buffer = new byte[Four];
-            _stream.Read(buffer, 0, Four);
+            await _stream.ReadAsync(buffer, 0, Four);
 
             return BitConverter.ToUInt32(buffer, 0);
         }
 
-        public ulong ReadUInt64()
+        public async Task<ulong> ReadUInt64()
         {
             var buffer = new byte[Eight];
-            _stream.Read(buffer, 0, Eight);
+            await _stream.ReadAsync(buffer, 0, Eight);
 
             return BitConverter.ToUInt64(buffer, 0);
         }
 
-        public float ReadFloat()
+        public async Task<float> ReadFloat()
         {
             var buffer = new byte[Four];
-            _stream.Read(buffer, 0, Four);
+            await _stream.ReadAsync(buffer, 0, Four);
 
             return BitConverter.ToSingle(buffer, 0);
         }
 
-        public DateTime ReadDateTime()
+        public async Task<DateTime> ReadDateTime()
         {
             return EnvironmentConstant
                 .UnixDateTime
-                .AddSeconds(ReadInt64())
+                .AddSeconds(await ReadInt64())
                 .ToLocalTime();
         }
 
-        public string ReadString(int count, Encoding encoding = null)
+        public async Task<string> ReadString(int count, Encoding encoding = null)
         {
             var buffer = new byte[count];
-            int bytesRead = _stream.Read(buffer, 0, buffer.Length);
+            int bytesRead = await _stream.ReadAsync(buffer, 0, buffer.Length);
 
             return (encoding ?? Encoding.Default)
                 .GetString(buffer, 0, bytesRead)
