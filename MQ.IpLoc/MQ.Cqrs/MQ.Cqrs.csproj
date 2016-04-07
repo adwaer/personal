@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MQ.Business\MQ.Business.csproj">
-      <Project>{5E889592-5B16-4022-ACCF-EA7E92DE30B8}</Project>
+      <Project>{5e889592-5b16-4022-accf-ea7e92de30b8}</Project>
       <Name>MQ.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">

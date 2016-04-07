@@ -6,7 +6,7 @@ namespace MQ.Business
 {
     public interface IBinaryReader
     {
-        int ReadInt32();
+        Task<int> ReadInt32();
         Task<uint> ReadUInt32();
         Task<ulong> ReadUInt64();
         Task<float> ReadFloat();

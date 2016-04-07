@@ -1,17 +1,16 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using MQ.Domain;
 
 namespace MQ.Business
 {
-    public class UnmanagedReader : IBinaryReader
+    public class AsyncReader : IBinaryReader
     {
         private readonly Stream _stream;
 
-        public UnmanagedReader(Stream stream)
+        public AsyncReader(Stream stream)
         {
             _stream = stream;
         }
@@ -19,16 +18,12 @@ namespace MQ.Business
         private const int Four = 4;
         private const int Eight = 8;
 
-        public unsafe int ReadInt32()
+        public async Task<int> ReadInt32()
         {
             var buffer = new byte[Four];
-            var ptr = Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0);
-            return Marshal.ReadInt32(ptr, 0);
+            await _stream.ReadAsync(buffer, 0, Four);
 
-
-            //await _stream.ReadAsync(buffer, 0, Four);
-
-            //return BitConverter.ToInt32(buffer, 0);
+            return BitConverter.ToInt32(buffer, 0);
         }
 
         public async Task<long> ReadInt64()

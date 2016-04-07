@@ -6,4 +6,5 @@ namespace MQ.Cqrs.Factory
     {
         T Get(IBinaryReader reader);
     }
+
 }

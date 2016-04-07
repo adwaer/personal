@@ -16,4 +16,5 @@ namespace MQ.Cqrs.Factory
             };
         }
     }
+    
 }

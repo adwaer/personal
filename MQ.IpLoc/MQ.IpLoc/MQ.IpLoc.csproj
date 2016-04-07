@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,11 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MQ.Business\MQ.Business.csproj">
-      <Project>{5E889592-5B16-4022-ACCF-EA7E92DE30B8}</Project>
+      <Project>{5e889592-5b16-4022-accf-ea7e92de30b8}</Project>
       <Name>MQ.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\MQ.Cqrs\MQ.Cqrs.csproj">
-      <Project>{DBC4E306-9F61-4008-8885-5A39B2EB3777}</Project>
+      <Project>{dbc4e306-9f61-4008-8885-5a39b2eb3777}</Project>
       <Name>MQ.Cqrs</Name>
     </ProjectReference>
     <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">

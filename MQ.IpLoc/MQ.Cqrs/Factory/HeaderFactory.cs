@@ -10,10 +10,10 @@ namespace MQ.Cqrs.Factory
         {
             return new Header
             {
-                Version = reader.ReadInt32(),
+                Version = await reader.ReadInt32(),
                 Name = await reader.ReadString(32),
                 MakeTime = await reader.ReadDateTime(),
-                RecordCount = reader.ReadInt32(),
+                RecordCount = await reader.ReadInt32(),
                 RangeOffset = await reader.ReadUInt32(),
                 CityOffset = await reader.ReadUInt32(),
                 LocationOffset = await reader.ReadUInt32()

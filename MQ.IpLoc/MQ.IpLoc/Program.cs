@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.IO.MemoryMappedFiles;
 using MQ.Business;
 using MQ.Cqrs.Factory;
@@ -11,7 +13,8 @@ namespace MQ.IpLoc
         private const string FilePath = "geobase.dat";
         private static void Main(string[] args)
         {
-            DateTime start1 = DateTime.Now;
+            var watch = new Stopwatch();
+            watch.Start();
 
             //using (var stream = File.OpenRead("geobase.dat"))
             //{
@@ -19,17 +22,20 @@ namespace MQ.IpLoc
             //DbReadMethods.ReadByMethods(ref start); // 400 ms
             //DbReadMethods.ReadByQuery(ref start); // 500 ms
             //}
-            
-            DbReadMethods.ReadUnsafe(); // ??? ms
 
-            WriteLog(ref start1, "spent");
+
+            //DbReadMethods.ReadAsync(); // 400 ms
+            DbReadMethods.ReadUnsafeToJson(); // ??? ms
+
+            WriteLog(watch.Elapsed, "spent");
+            watch.Stop();
             Console.ReadLine();
         }
 
-        static void WriteLog(ref DateTime start, string action)
+        static void WriteLog(TimeSpan spent, string action)
         {
-            Console.WriteLine($"{action} time: {(DateTime.Now - start).TotalMilliseconds}");
-            start = DateTime.Now;
+            Console.WriteLine($"{action} time: {spent}");
         }
+
     }
 }

@@ -36,6 +36,17 @@ namespace MQ.Domain
         /// </summary>
         public float Lon { get; set; }
 
+        public void Fill(string country, string region, string postal, string city, string company, float lat, float lon)
+        {
+            Country = country;
+            Region = region;
+            Postal = postal;
+            City = city;
+            Company = company;
+            Lat = lat;
+            Lon = lon;
+        }
+
         public override string ToString()
         {
             return $"{Country} {Region} {Postal} {City} {Company} {Lat}/{Lon}";
