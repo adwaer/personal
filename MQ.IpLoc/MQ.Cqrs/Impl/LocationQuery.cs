@@ -1,22 +1,22 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using MQ.Business;
+using MQ.Cqrs.Factory;
 using MQ.Domain;
 
 namespace MQ.Cqrs.Impl
 {
-    public class LocationQuery : IQuery<Stream, int, Task<Location[]>>
+    public class LocationQuery : IQuery<IBinaryReader, int, Task<Location[]>>
     {
-        public Task<Location[]> Execute(Stream stream, int recordCount)
+        public Task<Location[]> Execute(IBinaryReader binaryReader, int recordCount)
         {
             return Task.Factory.StartNew(() =>
             {
+                LocationFactory factory = new LocationFactory();
+
                 Location[] locations = new Location[recordCount];
-                using (var reader = new BinaryReader(stream))
+                for (int i = 0; i < recordCount; i++)
                 {
-                    for (int i = 0; i < recordCount; i++)
-                    {
-                        locations[i] = Location.Get(reader);
-                    }
+                    locations[i] = factory.Get(binaryReader);
                 }
 
                 return locations;

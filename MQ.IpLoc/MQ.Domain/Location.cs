@@ -36,20 +36,6 @@ namespace MQ.Domain
         /// </summary>
         public float Lon { get; set; }
 
-        public static Location Get(BinaryReader reader)
-        {
-            return new Location
-            {
-                Country = EnvironmentConstant.ReadString(reader, 8),
-                Region = EnvironmentConstant.ReadString(reader, 12),
-                Postal = EnvironmentConstant.ReadString(reader, 12),
-                City = EnvironmentConstant.ReadString(reader, 24),
-                Company = EnvironmentConstant.ReadString(reader, 32),
-                Lat = reader.ReadSingle(),
-                Lon = reader.ReadSingle()
-            };
-        }
-
         public override string ToString()
         {
             return $"{Country} {Region} {Postal} {City} {Company} {Lat}/{Lon}";

@@ -20,16 +20,6 @@ namespace MQ.Domain
         /// </summary>
         public uint Index { get; set; }
 
-        public static IpLocation Get(BinaryReader reader)
-        {
-            return new IpLocation
-            {
-                FromIp = reader.ReadUInt64(),
-                ToIp = reader.ReadUInt64(),
-                Index = reader.ReadUInt32()
-            };
-        }
-
         public override string ToString()
         {
             return $"{FromIp} {ToIp} {Index}";

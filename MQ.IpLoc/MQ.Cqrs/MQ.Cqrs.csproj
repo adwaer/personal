@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\HeaderFactory.cs" />
+    <Compile Include="Factory\IEntityFactory.cs" />
+    <Compile Include="Factory\IpLocationFactory.cs" />
+    <Compile Include="Factory\LocationFactory.cs" />
     <Compile Include="Impl\IndexQuery.cs" />
     <Compile Include="Impl\LocationQuery.cs" />
     <Compile Include="Impl\IpLocationQuery.cs" />
@@ -48,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MQ.Business\MQ.Business.csproj">
+      <Project>{5E889592-5B16-4022-ACCF-EA7E92DE30B8}</Project>
+      <Name>MQ.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">
       <Project>{4b9a581a-2737-4a2a-9bfd-a8ab749ed2f0}</Project>
       <Name>MQ.Domain</Name>

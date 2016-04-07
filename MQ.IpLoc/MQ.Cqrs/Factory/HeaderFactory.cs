@@ -1,8 +1,9 @@
-﻿using MQ.Domain;
+﻿using MQ.Business;
+using MQ.Domain;
 
-namespace MQ.Business.Factory
+namespace MQ.Cqrs.Factory
 {
-    public class HeaderEntityFactory : IEntityFactory<Header>
+    public class HeaderFactory : IEntityFactory<Header>
     {
         public Header Get(IBinaryReader reader)
         {

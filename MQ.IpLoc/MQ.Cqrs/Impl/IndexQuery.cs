@@ -1,21 +1,18 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using MQ.Business;
 
 namespace MQ.Cqrs.Impl
 {
-    public class IndexQuery : IQuery<Stream, int, Task<float[]>>
+    public class IndexQuery : IQuery<IBinaryReader, int, Task<float[]>>
     {
-        public Task<float[]> Execute(Stream stream, int recordCount)
+        public Task<float[]> Execute(IBinaryReader binaryReader, int recordCount)
         {
             return Task.Factory.StartNew(() =>
             {
                 float[] indexes = new float[recordCount];
-                using (var reader = new BinaryReader(stream))
+                for (int i = 0; i < recordCount; i++)
                 {
-                    for (int i = 0; i < recordCount; i++)
-                    {
-                        indexes[i] = reader.ReadInt32();
-                    }
+                    indexes[i] = binaryReader.ReadInt32();
                 }
 
                 return indexes;

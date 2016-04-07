@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.MemoryMappedFiles;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MQ.Business;
+using MQ.Cqrs.Factory;
 using MQ.Cqrs.Impl;
 using MQ.Domain;
 
@@ -24,21 +22,27 @@ namespace MQ.IpLoc
                 {
                     header = Header.Get(reader);
                 }
-
-                var ipLocations = new IpLocationQuery()
-                    .Execute(Helpers.CloneStream(stream, 20 * header.RecordCount), header.RecordCount);
-
-                var locations = new LocationQuery()
-                    .Execute(Helpers.CloneStream(stream, 96 * header.RecordCount), header.RecordCount);
-
-                var indexes = new IndexQuery()
-                    .Execute(Helpers.CloneStream(stream, 4 * header.RecordCount), header.RecordCount);
-
-                Console.WriteLine($"last ip loc: {ipLocations.Result[header.RecordCount - 1]}");
-                Console.WriteLine($"last loc: {locations.Result[header.RecordCount - 1]}");
-                Console.WriteLine($"last index: {indexes.Result[header.RecordCount - 1]}");
+                
+                using (BinaryReader reader = new BinaryReader(Helpers.CloneStream(stream, 20 * header.RecordCount)))
+                {
+                    var ipLocations = new IpLocationQuery()
+                        .Execute(new ManagedReader(reader), header.RecordCount);
+                }
+                
+                using (BinaryReader reader = new BinaryReader(Helpers.CloneStream(stream, 96 * header.RecordCount)))
+                {
+                    var locations = new LocationQuery()
+                        .Execute(new ManagedReader(reader), header.RecordCount);
+                }
+                
+                using (BinaryReader reader = new BinaryReader(Helpers.CloneStream(stream, 4 * header.RecordCount)))
+                {
+                    var indexes = new IndexQuery()
+                        .Execute(new ManagedReader(reader), header.RecordCount);
+                }
             }
         }
+
         public static void ReadByMethods(ref DateTime start)
         {
             Helpers.WriteLog(ref start, "read");
@@ -46,65 +50,60 @@ namespace MQ.IpLoc
             {
                 using (BinaryReader reader = new BinaryReader(stream))
                 {
-                    Header header = Header.Get(reader);
-                    var ipLocations = GetIpLocation(reader, header.RecordCount);
-                    var locations = GetLocation(reader, header.RecordCount);
-                    var indexes = GetIndexes(reader, header.RecordCount);
+                    IBinaryReader binaryReader = new ManagedReader(reader);
 
-                    Console.WriteLine($"last ip loc: {ipLocations[header.RecordCount - 1]}");
-                    Console.WriteLine($"last loc: {locations[header.RecordCount - 1]}");
-                    Console.WriteLine($"last index: {indexes[header.RecordCount - 1]}");
+                    var header = GetHeader(binaryReader);
+                    var ipLocations = GetIpLocation(binaryReader, header.RecordCount);
+                    var locations = GetLocation(binaryReader, header.RecordCount);
+                    var indexes = GetIndexes(binaryReader, header.RecordCount);
                 }
             }
         }
 
         public static void ReadUnsafe(ref DateTime start)
         {
-            byte[] buffer = new byte[128];
-            using (var reader = new UnsafeFileReader())
-            {
-                if (reader.Open(FilePath))
-                {
-                    var readInt32 = reader.ReadInt32();
-                    var readString = reader.ReadString(32);
-                    //int bytesRead;
-                    //do
-                    //{
-                    //    bytesRead = reader.Read(buffer, 0, buffer.Length);
-                    //    string content = Encoding.Default.GetString(buffer, 0, bytesRead);
-                    //}
-                    //while (bytesRead > 0);
-                }
-            }
-
+            Helpers.WriteLog(ref start, "read");
             MemoryMappedFile mmf = MemoryMappedFile.CreateFromFile(FilePath);
-            Stream stream = mmf.CreateViewStream();
+            MemoryMappedViewStream stream = mmf.CreateViewStream();
 
-            byte[] data = new byte[4];
-            stream.Read(data, 0, 4);
+            IBinaryReader binaryReader = new UnmanagedReader(stream);
+
+            var header = GetHeader(binaryReader);
+            var ipLocations = GetIpLocation(binaryReader, header.RecordCount);
+            var locations = GetLocation(binaryReader, header.RecordCount);
+            var indexes = GetIndexes(binaryReader, header.RecordCount);
         }
 
-        private static IpLocation[] GetIpLocation(BinaryReader reader, int recordCount)
+        private static Header GetHeader(IBinaryReader reader)
         {
+            var factory = new HeaderFactory();
+            return factory.Get(reader);
+        }
+        private static IpLocation[] GetIpLocation(IBinaryReader reader, int recordCount)
+        {
+            IpLocationFactory factory = new IpLocationFactory();
+
             IpLocation[] ipLocations = new IpLocation[recordCount];
             for (uint i = 0; i < recordCount; i++)
             {
-                ipLocations[i] = IpLocation.Get(reader);
+                ipLocations[i] = factory.Get(reader);
             }
 
             return ipLocations;
         }
-        private static Location[] GetLocation(BinaryReader reader, int recordCount)
+        private static Location[] GetLocation(IBinaryReader reader, int recordCount)
         {
+            LocationFactory factory = new LocationFactory();
+
             Location[] locations = new Location[recordCount];
             for (int i = 0; i < recordCount; i++)
             {
-                locations[i] = Location.Get(reader);
+                locations[i] = factory.Get(reader);
             }
 
             return locations;
         }
-        private static float[] GetIndexes(BinaryReader reader, int recordCount)
+        private static float[] GetIndexes(IBinaryReader reader, int recordCount)
         {
             float[] indexes = new float[recordCount];
             for (int i = 0; i < recordCount; i++)

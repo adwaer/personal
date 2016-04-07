@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,10 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factory\HeaderFactory.cs" />
-    <Compile Include="Factory\IEntityFactory.cs" />
-    <Compile Include="Factory\IpLocationFactory.cs" />
-    <Compile Include="Factory\LocationFactory.cs" />
     <Compile Include="IBinaryReader.cs" />
     <Compile Include="ManagedReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,9 +51,9 @@
       <Project>{4B9A581A-2737-4A2A-9BFD-A8AB749ED2F0}</Project>
       <Name>MQ.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MQ.IpLoc\MQ.IpLoc.csproj">
-      <Project>{4C8D5FEC-52B1-45AF-B239-20EA3561ED9A}</Project>
-      <Name>MQ.IpLoc</Name>
+    <ProjectReference Include="..\MQ.Unsafe\MQ.Unsafe.csproj">
+      <Project>{1FCFF15A-73D0-4828-8087-D68EC5AC810C}</Project>
+      <Name>MQ.Unsafe</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

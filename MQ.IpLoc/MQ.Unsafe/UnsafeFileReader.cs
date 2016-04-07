@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using MQ.Domain;
 
-namespace MQ.IpLoc
+namespace MQ.Unsafe
 {
     public class UnsafeFileReader : IDisposable
     {

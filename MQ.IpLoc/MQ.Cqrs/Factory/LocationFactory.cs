@@ -1,6 +1,7 @@
-﻿using MQ.Domain;
+﻿using MQ.Business;
+using MQ.Domain;
 
-namespace MQ.Business.Factory
+namespace MQ.Cqrs.Factory
 {
     public class LocationFactory : IEntityFactory<Location>
     {

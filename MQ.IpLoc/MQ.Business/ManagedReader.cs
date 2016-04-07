@@ -8,12 +8,10 @@ namespace MQ.Business
     public class ManagedReader : IBinaryReader
     {
         private readonly BinaryReader _binaryReader;
-        private readonly Stream _stream;
 
-        public ManagedReader(string fileName)
+        public ManagedReader(BinaryReader reader)
         {
-            _stream = File.OpenRead(fileName);
-            _binaryReader = new BinaryReader(_stream);
+            _binaryReader = reader;
         }
 
         public int ReadInt32()
@@ -49,12 +47,6 @@ namespace MQ.Business
             return (encoding ?? Encoding.Default)
                 .GetString(_binaryReader.ReadBytes(count))
                 .TrimEnd(EnvironmentConstant.EmptySpace);
-        }
-
-        public void Dispose()
-        {
-            _stream.Dispose();
-            _binaryReader.Dispose();
         }
     }
 }

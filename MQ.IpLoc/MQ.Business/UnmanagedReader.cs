@@ -1,55 +1,78 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using MQ.Domain;
-using MQ.IpLoc;
 
 namespace MQ.Business
 {
     public class UnmanagedReader : IBinaryReader
     {
-        private readonly UnsafeFileReader _reader;
+        private readonly Stream _stream;
 
-        public UnmanagedReader(UnsafeFileReader reader)
+        public UnmanagedReader(Stream stream)
         {
-            _reader = reader;
+            _stream = stream;
         }
 
-        public void Dispose()
-        {
-            _reader.Dispose();
-        }
+        private const int Four = 4;
+        private const int Eight = 8;
 
         public int ReadInt32()
         {
-            return _reader.ReadInt32();
+            var buffer = new byte[Four];
+            _stream.Read(buffer, 0, Four);
+
+            return BitConverter.ToInt32(buffer, 0);
+        }
+
+        public long ReadInt64()
+        {
+            var buffer = new byte[Eight];
+            _stream.Read(buffer, 0, Eight);
+
+            return BitConverter.ToInt64(buffer, 0);
         }
 
         public uint ReadUInt32()
         {
-            return _reader.ReadUInt32();
+            var buffer = new byte[Four];
+            _stream.Read(buffer, 0, Four);
+
+            return BitConverter.ToUInt32(buffer, 0);
         }
 
         public ulong ReadUInt64()
         {
-            return _reader.ReadUInt64();
+            var buffer = new byte[Eight];
+            _stream.Read(buffer, 0, Eight);
+
+            return BitConverter.ToUInt64(buffer, 0);
         }
 
         public float ReadFloat()
         {
-            return _reader.ReadSingle();
+            var buffer = new byte[Four];
+            _stream.Read(buffer, 0, Four);
+
+            return BitConverter.ToSingle(buffer, 0);
         }
 
         public DateTime ReadDateTime()
         {
             return EnvironmentConstant
                 .UnixDateTime
-                .AddSeconds(_reader.ReadInt64())
+                .AddSeconds(ReadInt64())
                 .ToLocalTime();
         }
 
         public string ReadString(int count, Encoding encoding = null)
         {
-            return _reader.ReadString(count, encoding);
+            var buffer = new byte[count];
+            int bytesRead = _stream.Read(buffer, 0, buffer.Length);
+
+            return (encoding ?? Encoding.Default)
+                .GetString(buffer, 0, bytesRead)
+                .TrimEnd(EnvironmentConstant.EmptySpace);
         }
     }
 }

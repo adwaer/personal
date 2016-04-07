@@ -1,16 +1,16 @@
 ﻿using System.IO;
+using MQ.Business;
+using MQ.Cqrs.Factory;
 using MQ.Domain;
 
 namespace MQ.Cqrs.Impl
 {
-    public class HeaderFileQuery : IQuery<Stream, Header>
+    public class HeaderFileQuery : IQuery<IBinaryReader, Header>
     {
-        public Header Execute(Stream stream)
+        public Header Execute(IBinaryReader binaryReader)
         {
-            using (BinaryReader reader = new BinaryReader(stream))
-            {
-                return Header.Get(reader);
-            }
+            var factory = new HeaderFactory();
+            return factory.Get(binaryReader);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace MQ.Business
 {
-    public interface IBinaryReader : IDisposable
+    public interface IBinaryReader
     {
         int ReadInt32();
         uint ReadUInt32();
