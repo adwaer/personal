@@ -63,7 +63,7 @@
       <Name>MQ.Cqrs</Name>
     </ProjectReference>
     <ProjectReference Include="..\MQ.Dal\MQ.Dal.csproj">
-      <Project>{56656234-7D1F-47F4-81B3-5D86E35CF942}</Project>
+      <Project>{56656234-7d1f-47f4-81b3-5d86e35cf942}</Project>
       <Name>MQ.Dal</Name>
     </ProjectReference>
     <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">

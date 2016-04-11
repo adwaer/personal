@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -14,10 +15,9 @@ namespace MQ.Dal
         public IpLocation[] IpLocations { get; private set; }
         public Location[] Locations { get; private set; }
         public float[] Indexes { get; private set; }
-        
+
         public void Fetch()
         {
-            byte[] buffer;
             using (FileReader fr = new FileReader())
             {
                 if (!fr.Open(FilePath))
@@ -26,23 +26,79 @@ namespace MQ.Dal
                     return;
                 }
 
-                var fileInfo = new FileInfo(FilePath);
-                buffer = new byte[fileInfo.Length];
-                fr.Read(buffer, 0, (int)fileInfo.Length);
+                var headerBuffer = new byte[60];
+                fr.Read(headerBuffer, 0, 60);
+
+                var recordCount = BitConverter.ToInt32(headerBuffer, 44);
+
+                var ipLocWaiter = new ManualResetEventSlim();
+                var locWaiter = new ManualResetEventSlim();
+                var indexWaiter = new ManualResetEventSlim();
+
+                var ipLocations = new IpLocation[recordCount];
+                var locations = new Location[recordCount];
+                var indexes = new float[recordCount];
+
+                var length = 20 * recordCount;
+                var buffer = new byte[length];
+                fr.Read(buffer, 0, length);
+                ThreadPool.QueueUserWorkItem(FetchIpLocations, new ThreadParams<IpLocation>
+                {
+                    Buffer = buffer,
+                    RecordCount = recordCount,
+                    Waiter = ipLocWaiter,
+                    Result = ipLocations
+                });
+
+                length = 96 * recordCount;
+                buffer = new byte[length];
+                fr.Read(buffer, 0, length);
+                ThreadPool.QueueUserWorkItem(FetchLocations, new ThreadParams<Location>
+                {
+                    Buffer = buffer,
+                    RecordCount = recordCount,
+                    Waiter = locWaiter,
+                    Result = locations
+                });
+
+                length = 4 * recordCount;
+                buffer = new byte[length];
+                fr.Read(buffer, 0, length);
+                ThreadPool.QueueUserWorkItem(FetchIndexes, new ThreadParams<float>
+                {
+                    Buffer = buffer,
+                    RecordCount = recordCount,
+                    Waiter = indexWaiter,
+                    Result = indexes
+                });
+
+                FetchHeader(headerBuffer, recordCount);
+
+                ipLocWaiter.Wait();
+                locWaiter.Wait();
+                indexWaiter.Wait();
+
+                IpLocations = ipLocations;
+                Locations = locations;
+                Indexes = indexes;
             }
-            
+
+        }
+
+        private void FetchHeader(byte[] buffer, int recordCount)
+        {
             int position = 0;
 
-            var version = BitConverter.ToInt32(buffer, position);
+            var version = CustomConvert.ToInt32(buffer, position);
             position += 4;
 
-            string name = Encoding.Default.GetString(buffer, position, 32);
+            string name = CustomConvert.ToString(buffer, position, 32);
             position += 32;
 
             var makeTime = EnvironmentConstant.UnixDateTime.AddSeconds(BitConverter.ToInt64(buffer, position));
             position += 8;
 
-            var recordCount = BitConverter.ToInt32(buffer, position);
+            //var recordCount = BitConverter.ToInt32(buffer, position);
             position += 4;
 
             var rangeOffset = BitConverter.ToUInt32(buffer, position);
@@ -52,42 +108,6 @@ namespace MQ.Dal
             position += 4;
 
             var locationOffset = BitConverter.ToUInt32(buffer, position);
-            position += 4;
-
-            var ipLocWaiter = new ManualResetEventSlim();
-            var locWaiter = new ManualResetEventSlim();
-            var indexWaiter = new ManualResetEventSlim();
-
-            var ipLocations = new IpLocation[recordCount];
-            var locations = new Location[recordCount];
-            var indexes = new float[recordCount];
-
-            ThreadPool.QueueUserWorkItem(FetchIpLocations, new ThreadParams<IpLocation>
-            {
-                Buffer = buffer,
-                Position = position,
-                RecordCount = recordCount,
-                Waiter = ipLocWaiter,
-                Result = ipLocations
-            });
-            position += 20 * recordCount;
-            ThreadPool.QueueUserWorkItem(FetchLocations, new ThreadParams<Location>
-            {
-                Buffer = buffer,
-                Position = position,
-                RecordCount = recordCount,
-                Waiter = locWaiter,
-                Result = locations
-            });
-            position += 96 * recordCount;
-            ThreadPool.QueueUserWorkItem(FetchIndexes, new ThreadParams<float>
-            {
-                Buffer = buffer,
-                Position = position,
-                RecordCount = recordCount,
-                Waiter = indexWaiter,
-                Result = indexes
-            });
 
             Header = new Header
             {
@@ -99,20 +119,15 @@ namespace MQ.Dal
                 Name = name,
                 Version = version
             };
-
-            ipLocWaiter.Wait();
-            locWaiter.Wait();
-            indexWaiter.Wait();
-
-            IpLocations = ipLocations;
-            Locations = locations;
-            Indexes = indexes;
         }
 
         private static void FetchIpLocations(object data)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             var pars = (ThreadParams<IpLocation>)data;
-            var position = pars.Position;
+            var position = 0;
             var buffer = pars.Buffer;
             var recordCount = pars.RecordCount;
 
@@ -134,33 +149,39 @@ namespace MQ.Dal
                 };
             }
 
+            stopwatch.Stop();
+            Console.WriteLine($"ip locations time: {stopwatch.ElapsedMilliseconds}ms");
+
+
             pars.Waiter.Set();
         }
 
         private static void FetchLocations(object data)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             var pars = (ThreadParams<Location>)data;
-            var position = pars.Position;
+            var position = 0;
             var buffer = pars.Buffer;
             var recordCount = pars.RecordCount;
-            Encoding ansiEncoding = Encoding.Default;
 
             var locations = pars.Result;
             for (int i = 0; i < recordCount; i++)
             {
-                string country = ansiEncoding.GetString(buffer, position, 8);
+                string country = CustomConvert.ToString(buffer, position, 8);
                 position += 8;
-                string region = ansiEncoding.GetString(buffer, position, 12);
+                string region = CustomConvert.ToString(buffer, position, 12);
                 position += 12;
-                string postal = ansiEncoding.GetString(buffer, position, 12);
+                string postal = CustomConvert.ToString(buffer, position, 12);
                 position += 12;
-                string city = ansiEncoding.GetString(buffer, position, 24);
+                string city = CustomConvert.ToString(buffer, position, 24);
                 position += 24;
-                string company = ansiEncoding.GetString(buffer, position, 32);
+                string company = CustomConvert.ToString(buffer, position, 32);
                 position += 32;
-                var lat = BitConverter.ToInt32(buffer, position);
+                var lat = CustomConvert.ToSingle(buffer, position);
                 position += 4;
-                var lon = BitConverter.ToInt32(buffer, position);
+                var lon = CustomConvert.ToSingle(buffer, position);
                 position += 4;
 
                 locations[i] = new Location
@@ -175,24 +196,28 @@ namespace MQ.Dal
                 };
             }
 
+            stopwatch.Stop();
+            Console.WriteLine($"locations time: {stopwatch.ElapsedMilliseconds}ms");
+
             pars.Waiter.Set();
         }
 
         private static void FetchIndexes(object data)
         {
             var pars = (ThreadParams<float>)data;
-            var position = pars.Position;
+            var position = 0;
             var buffer = pars.Buffer;
             var recordCount = pars.RecordCount;
 
             var indexes = pars.Result;
             for (int i = 0; i < recordCount; i++)
             {
-                indexes[i] = BitConverter.ToSingle(buffer, position);
+                indexes[i] = BitConverter.ToInt32(buffer, position);
                 position += 4;
             }
 
             pars.Waiter.Set();
         }
+        
     }
 }
