@@ -44,8 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbReadMethods.cs" />
-    <Compile Include="Helpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,6 +61,10 @@
     <ProjectReference Include="..\MQ.Cqrs\MQ.Cqrs.csproj">
       <Project>{dbc4e306-9f61-4008-8885-5a39b2eb3777}</Project>
       <Name>MQ.Cqrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MQ.Dal\MQ.Dal.csproj">
+      <Project>{56656234-7D1F-47F4-81B3-5D86E35CF942}</Project>
+      <Name>MQ.Dal</Name>
     </ProjectReference>
     <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">
       <Project>{4b9a581a-2737-4a2a-9bfd-a8ab749ed2f0}</Project>

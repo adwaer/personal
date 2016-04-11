@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 
 namespace MQ.Domain
 {
@@ -37,21 +35,5 @@ namespace MQ.Domain
         /// смещение относительно начала файла до начала списка записей о местоположении
         /// </summary>
         public uint LocationOffset { get; set; }
-
-        public static Header Get(BinaryReader reader)
-        {
-            return new Header
-            {
-                Version = reader.ReadInt32(),
-                Name = Encoding.Default
-                    .GetString(reader.ReadBytes(32))
-                    .TrimEnd(EnvironmentConstant.EmptySpace),
-                MakeTime = EnvironmentConstant.UnixDateTime.AddSeconds(reader.ReadInt64()).ToLocalTime(),
-                RecordCount = reader.ReadInt32(),
-                RangeOffset = reader.ReadUInt32(),
-                CityOffset = reader.ReadUInt32(),
-                LocationOffset = reader.ReadUInt32()
-            };
-        }
     }
 }

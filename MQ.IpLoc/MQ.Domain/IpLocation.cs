@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace MQ.Domain
+﻿namespace MQ.Domain
 {
     /// <summary>
     /// Запись с геоинформацией

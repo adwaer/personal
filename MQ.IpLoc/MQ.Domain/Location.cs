@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace MQ.Domain
+﻿namespace MQ.Domain
 {
     /// <summary>
     /// cписок записей с информацией о местоположении с координатами (долгота и широта)
@@ -35,17 +33,6 @@ namespace MQ.Domain
         /// долгота
         /// </summary>
         public float Lon { get; set; }
-
-        public void Fill(string country, string region, string postal, string city, string company, float lat, float lon)
-        {
-            Country = country;
-            Region = region;
-            Postal = postal;
-            City = city;
-            Company = company;
-            Lat = lat;
-            Lon = lon;
-        }
 
         public override string ToString()
         {

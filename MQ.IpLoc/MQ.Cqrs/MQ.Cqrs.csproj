@@ -40,10 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factory\HeaderFactory.cs" />
-    <Compile Include="Factory\IEntityFactory.cs" />
-    <Compile Include="Factory\IpLocationFactory.cs" />
-    <Compile Include="Factory\LocationFactory.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +52,9 @@
       <Project>{4b9a581a-2737-4a2a-9bfd-a8ab749ed2f0}</Project>
       <Name>MQ.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Factory\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
