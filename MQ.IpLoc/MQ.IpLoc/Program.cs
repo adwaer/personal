@@ -11,7 +11,9 @@ namespace MQ.IpLoc
         private static void Main()
         {
             var watch = new Stopwatch();
+#if !DEBUG
             StartDelay(5);
+#endif  
 
             watch.Start();
 
