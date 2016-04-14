@@ -3,7 +3,10 @@ using System.Runtime.InteropServices;
 
 namespace MQ.Business
 {
-    public class FileReader : IDisposable
+    /// <summary>
+    /// Binary unsafe file reader
+    /// </summary>
+    public class CustomFileReader : IDisposable
     {
         const uint GENERIC_READ = 0x80000000;
         const uint OPEN_EXISTING = 3;
@@ -35,10 +38,10 @@ namespace MQ.Business
               IntPtr hObject   // handle объекта
               );
 
-        public bool Open(string FileName)
+        public bool Open(string fileName)
         {
             // open the existing file for reading          
-            handle = CreateFile(FileName,
+            handle = CreateFile(fileName,
                                 GENERIC_READ,
                                 0,
                                 0,
@@ -46,10 +49,7 @@ namespace MQ.Business
                                 0,
                                 0);
 
-            if (handle != IntPtr.Zero)
-                return true;
-            else
-                return false;
+            return handle != IntPtr.Zero;
         }
 
         public unsafe void Read(byte[] buffer, int index, int count)

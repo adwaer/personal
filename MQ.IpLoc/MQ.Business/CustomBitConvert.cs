@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Security;
 
 namespace MQ.Business
 {
-    public class CustomConvert
+    /// <summary>
+    /// Custom unsafe bit converter
+    /// </summary>
+    public class CustomBitConvert
     {
         public static Func<byte[], int, int> ToInt32;
         public static Func<byte[], int, long> ToInt64;
 
-        static CustomConvert()
+        static CustomBitConvert()
         {
             if (BitConverter.IsLittleEndian)
             {
@@ -24,13 +26,22 @@ namespace MQ.Business
 
         public unsafe static string ToString(byte[] bytes, int offset, int length)
         {
+            var i = length;
+
+            for (int j = 0; j < length; j++)
+            {
+                if (bytes[j + offset] == 0)
+                {
+                    i--;
+                }
+            }
+
             fixed (byte* p = bytes)
             {
-                return new string((sbyte*)p, offset, length);
+                return new string((sbyte*)p, offset, i);
             }
         }
 
-        [SecuritySafeCritical]
         public static unsafe float ToSingle(byte[] bytes, int offset)
         {
             fixed (byte* numPtr = &bytes[offset])
@@ -49,7 +60,7 @@ namespace MQ.Business
 
         public static uint ToUInt32(byte[] bytes, int offset)
         {
-            return (uint)BitConverter.ToInt32(bytes, offset);
+            return (uint)ToInt32(bytes, offset);
         }
 
         #region private

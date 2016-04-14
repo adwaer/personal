@@ -8,5 +8,6 @@ namespace MQ.Dal
         public byte[] Buffer;
         public TResult[] Result;
         public ManualResetEventSlim Waiter;
+        public int StartIndex;
     }
 }

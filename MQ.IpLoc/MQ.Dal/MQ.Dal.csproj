@@ -49,6 +49,10 @@
       <Project>{5E889592-5B16-4022-ACCF-EA7E92DE30B8}</Project>
       <Name>MQ.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MQ.Cqrs\MQ.Cqrs.csproj">
+      <Project>{DBC4E306-9F61-4008-8885-5A39B2EB3777}</Project>
+      <Name>MQ.Cqrs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">
       <Project>{4B9A581A-2737-4A2A-9BFD-A8AB749ED2F0}</Project>
       <Name>MQ.Domain</Name>

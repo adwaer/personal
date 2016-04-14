@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomConvert.cs" />
-    <Compile Include="FileReader.cs" />
+    <Compile Include="CustomBitConvert.cs" />
+    <Compile Include="CustomFileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Singleton.cs" />
   </ItemGroup>

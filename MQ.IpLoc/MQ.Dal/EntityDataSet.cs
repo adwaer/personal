@@ -20,7 +20,7 @@ namespace MQ.Dal
 
         public void Fetch()
         {
-            using (FileReader fr = new FileReader())
+            using (var fr = new CustomFileReader())
             {
                 if (!fr.Open(FilePath))
                 {
@@ -121,10 +121,10 @@ namespace MQ.Dal
         {
             int position = 0;
 
-            var version = CustomConvert.ToInt32(buffer, position);
+            var version = CustomBitConvert.ToInt32(buffer, position);
             position += 4;
 
-            string name = CustomConvert.ToString(buffer, position, 32);
+            string name = CustomBitConvert.ToString(buffer, position, 32);
             position += 32;
 
             var makeTime = EnvironmentConstant.UnixDateTime.AddSeconds(BitConverter.ToInt64(buffer, position));
@@ -167,11 +167,11 @@ namespace MQ.Dal
             var ipLocations = pars.Result;
             for (int i = 0; i < recordCount; i++)
             {
-                var fromIp = CustomConvert.ToUInt64(buffer, position);
+                var fromIp = CustomBitConvert.ToUInt64(buffer, position);
                 position += 8;
-                var toIp = CustomConvert.ToUInt64(buffer, position);
+                var toIp = CustomBitConvert.ToUInt64(buffer, position);
                 position += 8;
-                var index = CustomConvert.ToUInt32(buffer, position);
+                var index = CustomBitConvert.ToUInt32(buffer, position);
                 position += 4;
 
                 ipLocations[i] = new IpLocation
@@ -198,19 +198,19 @@ namespace MQ.Dal
             var locations = pars.Result;
             for (int i = 0; i < recordCount; i++)
             {
-                string country = CustomConvert.ToString(buffer, position, 8);
+                string country = CustomBitConvert.ToString(buffer, position, 8);
                 position += 8;
-                string region = CustomConvert.ToString(buffer, position, 12);
+                string region = CustomBitConvert.ToString(buffer, position, 12);
                 position += 12;
-                string postal = CustomConvert.ToString(buffer, position, 12);
+                string postal = CustomBitConvert.ToString(buffer, position, 12);
                 position += 12;
-                string city = CustomConvert.ToString(buffer, position, 24);
+                string city = CustomBitConvert.ToString(buffer, position, 24);
                 position += 24;
-                string company = CustomConvert.ToString(buffer, position, 32);
+                string company = CustomBitConvert.ToString(buffer, position, 32);
                 position += 32;
-                var lat = CustomConvert.ToSingle(buffer, position);
+                var lat = CustomBitConvert.ToSingle(buffer, position);
                 position += 4;
-                var lon = CustomConvert.ToSingle(buffer, position);
+                var lon = CustomBitConvert.ToSingle(buffer, position);
                 position += 4;
 
                 locations[i] = new Location
@@ -241,7 +241,7 @@ namespace MQ.Dal
             var indexes = pars.Result;
             for (int i = 0; i < recordCount; i++)
             {
-                indexes[i] = CustomConvert.ToInt32(buffer, position);
+                indexes[i] = CustomBitConvert.ToInt32(buffer, position);
                 position += 4;
             }
 
