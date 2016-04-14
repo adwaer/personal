@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Threading;
+using Microsoft.Owin.Hosting;
 using MQ.Business;
 using MQ.Dal;
+using MQ.WebApi;
 
-namespace MQ.IpLoc
+namespace MQ.Host
 {
-    internal class Program
+    class Program
     {
         private static void Main()
         {
@@ -24,9 +27,16 @@ namespace MQ.IpLoc
 
             WriteLog(watch.ElapsedMilliseconds, "spent");
 
-            Console.WriteLine("Press any key to exit");
-            Console.WriteLine();
-            Console.ReadKey();
+            var host = ConfigurationManager.AppSettings["host"];
+            using (WebApp.Start<Startup>(host))
+            {
+
+                Console.WriteLine($"Starting host for uri: {host}");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to exit");
+                Console.ReadKey();
+
+            }
         }
 
         static void WriteLog(double spent, string action)

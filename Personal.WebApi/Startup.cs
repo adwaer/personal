@@ -26,9 +26,9 @@ namespace Personal.WebApi
         // parameter in the WebApp.Start method.
         public void Configuration(IAppBuilder app)
         {
-            var container = IocConfig.Configure();
+            var container = new ContainerBuilder().Build();
             ConfigureApp(container, app);
-            ConfigureAuth(app);
+            //ConfigureAuth(app);
 
             app.Run(context =>
             {
@@ -54,9 +54,9 @@ namespace Personal.WebApi
             app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(HttpConfiguration);
 
-            HttpConfiguration.SuppressDefaultHostAuthentication();
-            HttpConfiguration.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-            HttpConfiguration.Filters.Add(new HostAuthenticationFilter(BasicAuthenticationOptions.BasicAuthenticationType));
+            //HttpConfiguration.SuppressDefaultHostAuthentication();
+            //HttpConfiguration.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            //HttpConfiguration.Filters.Add(new HostAuthenticationFilter(BasicAuthenticationOptions.BasicAuthenticationType));
         }
 
         public void ConfigureAuth(IAppBuilder app)

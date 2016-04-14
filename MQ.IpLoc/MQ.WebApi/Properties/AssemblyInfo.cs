@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MQ.Unsafe")]
+[assembly: AssemblyTitle("MQ.WebApi")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MQ.Unsafe")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("sibiryak-soft")]
+[assembly: AssemblyProduct("MQ.WebApi")]
+[assembly: AssemblyCopyright("Copyright © sibiryak-soft 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1fcff15a-73d0-4828-8087-d68ec5ac810c")]
+[assembly: Guid("d8e4cfb3-5c14-40aa-a857-96878a897df4")]
 
 // Version information for an assembly consists of the following four values:
 //
