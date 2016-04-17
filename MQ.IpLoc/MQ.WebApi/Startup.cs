@@ -16,7 +16,7 @@ namespace MQ.WebApi
         // parameter in the WebApp.Start method.
         public void Configuration(IAppBuilder app)
         {
-            var container = new ContainerBuilder().Build();
+            var container = IocConfig.Configure();
             ConfigureApp(container, app);
             
             app.Run(context =>

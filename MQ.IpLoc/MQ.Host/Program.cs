@@ -9,23 +9,11 @@ using MQ.WebApi;
 
 namespace MQ.Host
 {
-    class Program
+    public class Program
     {
         private static void Main()
         {
-            var watch = new Stopwatch();
-#if !DEBUG
-            StartDelay(5);
-#endif  
-
-            watch.Start();
-
-            Singleton<EntityDataSet>.Instance
-                .Fetch();
-
-            watch.Stop();
-
-            WriteLog(watch.ElapsedMilliseconds, "spent");
+            FetchData();
 
             var host = ConfigurationManager.AppSettings["host"];
             using (WebApp.Start<Startup>(host))
@@ -33,10 +21,26 @@ namespace MQ.Host
 
                 Console.WriteLine($"Starting host for uri: {host}");
                 Console.WriteLine();
+
                 Console.WriteLine("Press any key to exit");
                 Console.ReadKey();
-
             }
+        }
+
+        private static void FetchData()
+        {
+            var watch = new Stopwatch();
+#if !DEBUG
+            StartDelay(5);
+#endif
+
+            watch.Start();
+
+            EntityDataSet.Instance.Fetch();
+
+            watch.Stop();
+
+            WriteLog(watch.ElapsedMilliseconds, "spent");
         }
 
         static void WriteLog(double spent, string action)

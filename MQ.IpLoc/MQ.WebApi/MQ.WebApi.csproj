@@ -111,6 +111,20 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MQ.Cqrs\MQ.Cqrs.csproj">
+      <Project>{DBC4E306-9F61-4008-8885-5A39B2EB3777}</Project>
+      <Name>MQ.Cqrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MQ.Dal\MQ.Dal.csproj">
+      <Project>{56656234-7D1F-47F4-81B3-5D86E35CF942}</Project>
+      <Name>MQ.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MQ.Domain\MQ.Domain.csproj">
+      <Project>{4B9A581A-2737-4A2A-9BFD-A8AB749ED2F0}</Project>
+      <Name>MQ.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

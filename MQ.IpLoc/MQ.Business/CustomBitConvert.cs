@@ -41,7 +41,6 @@ namespace MQ.Business
                 return new string((sbyte*)p, offset, i);
             }
         }
-
         public static unsafe float ToSingle(byte[] bytes, int offset)
         {
             fixed (byte* numPtr = &bytes[offset])
@@ -52,15 +51,40 @@ namespace MQ.Business
                 return *(float*)(*numPtr | numPtr[1] << 8 | numPtr[2] << 16 | numPtr[3] << 24);
             }
         }
-
         public static ulong ToUInt64(byte[] bytes, int offset)
         {
             return (ulong)ToInt64(bytes, offset);
         }
-
         public static uint ToUInt32(byte[] bytes, int offset)
         {
             return (uint)ToInt32(bytes, offset);
+        }
+        public static ulong Ip2Long(string ip)
+        {
+            double num = 0;
+            if (!string.IsNullOrEmpty(ip))
+            {
+                var ipBytes = ip.Split('.');
+                for (int i = ipBytes.Length - 1; i >= 0; i--)
+                {
+                    num += ((int.Parse(ipBytes[i]) % 256) * Math.Pow(256, (3 - i)));
+                }
+            }
+            return (ulong)num;
+        }
+        static public string LongToIp(ulong longIp)
+        {
+            string ip = string.Empty;
+            for (int i = 0; i < 4; i++)
+            {
+                int num = (int)(longIp / Math.Pow(256, (3 - i)));
+                longIp = longIp - (ulong)(num * Math.Pow(256, (3 - i)));
+                if (i == 0)
+                    ip = num.ToString();
+                else
+                    ip = ip + "." + num.ToString();
+            }
+            return ip;
         }
 
         #region private

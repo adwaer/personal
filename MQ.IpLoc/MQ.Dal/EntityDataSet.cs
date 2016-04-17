@@ -12,12 +12,39 @@ namespace MQ.Dal
 {
     public class EntityDataSet
     {
-        private const string FilePath = "geobase.dat";
-        public Header Header { get; private set; }
-        public IpLocation[] IpLocations { get; private set; }
-        public ICollection<Location> Locations { get; private set; }
-        public float[] Indexes { get; private set; }
+        /// <summary>
+        /// Singleton object instance
+        /// </summary>
+        public static EntityDataSet Instance => Singleton<EntityDataSet>.Instance;
 
+        /// <summary>
+        /// Database file path
+        /// </summary>
+        private const string FilePath = "geobase.dat";
+
+        /// <summary>
+        /// Header data entity
+        /// </summary>
+        public Header Header { get; private set; }
+        
+        /// <summary>
+        /// Ip location index
+        /// </summary>
+        public IpLocation[] IpLocations { get; private set; }
+
+        /// <summary>
+        /// Locations data set
+        /// </summary>
+        public IEnumerable<Location> Locations { get; private set; }
+
+        /// <summary>
+        /// Ip location - location indexs set
+        /// </summary>
+        public uint[] Indexes { get; private set; }
+        
+        /// <summary>
+        /// Fetch all data from db
+        /// </summary>
         public void Fetch()
         {
             using (var fr = new CustomFileReader())
@@ -77,9 +104,9 @@ namespace MQ.Dal
                 buffer = new byte[offset];
                 fr.Read(buffer, 0, offset);
                 var indexWaiter = new ManualResetEventSlim();
-                var indexes = new float[recordCount];
+                var indexes = new uint[recordCount];
 
-                ThreadPool.QueueUserWorkItem(FetchIndexes, new ThreadParams<float>
+                ThreadPool.QueueUserWorkItem(FetchIndexes, new ThreadParams<uint>
                 {
                     Buffer = buffer,
                     RecordCount = recordCount,
@@ -102,9 +129,9 @@ namespace MQ.Dal
                     locations.InsertRange(locWaiterThreadCount * i, locationArgs.Data);
                 }
 
-
                 IpLocations = ipLocations;
-                Locations = locations;
+                Locations = locations
+                    .OrderBy(l => l.City);
                 Indexes = indexes;
             }
 
@@ -233,7 +260,7 @@ namespace MQ.Dal
         /// <param name="data">Parameters for async thread starting (ThreadParams<float/>)</param>
         private static void FetchIndexes(object data)
         {
-            var pars = (ThreadParams<float>)data;
+            var pars = (ThreadParams<uint>)data;
             var position = 0;
             var buffer = pars.Buffer;
             var recordCount = pars.RecordCount;
@@ -241,7 +268,7 @@ namespace MQ.Dal
             var indexes = pars.Result;
             for (int i = 0; i < recordCount; i++)
             {
-                indexes[i] = CustomBitConvert.ToInt32(buffer, position);
+                indexes[i] = CustomBitConvert.ToUInt32(buffer, position);
                 position += 4;
             }
 

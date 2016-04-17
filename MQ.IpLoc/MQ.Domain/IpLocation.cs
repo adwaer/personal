@@ -18,6 +18,8 @@
         /// </summary>
         public uint Index { get; set; }
 
+        public Location Location { get; set; }
+
         public override string ToString()
         {
             return $"{FromIp} {ToIp} {Index}";

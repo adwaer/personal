@@ -1,4 +1,6 @@
-﻿namespace MQ.Domain
+﻿using System;
+
+namespace MQ.Domain
 {
     /// <summary>
     /// cписок записей с информацией о местоположении с координатами (долгота и широта)
