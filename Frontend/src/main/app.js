@@ -20,4 +20,4 @@
     window.angular.bootstrap(document, ['app']);
 };
 
-angular.element(document).ready(initApplication);
+//angular.element(document).ready(initApplication);
