@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using MQ.Cqrs.Query;
 using MQ.Dal;
@@ -25,7 +26,23 @@ namespace MQ.CommonTests
                 .Instance)
                 .Execute(ip);
 
-            Assert.NotNull(query.Result);
+            const string cityEmynysu = "cit_U Emynysu";
+            Assert.AreEqual(cityEmynysu, query.Result.City);
+        }
+
+        [Test]
+        [TestCase("cit_Iwes")]
+        public void CityLocationTest(string city)
+        {
+            var query = new LocationByCityQuery(EntityDataSet
+                .Instance)
+                .Execute(city);
+
+            var firstCity = query.Result
+                .Select(l => l.City)
+                .First();
+
+            Assert.AreEqual(city, firstCity);
         }
     }
 }

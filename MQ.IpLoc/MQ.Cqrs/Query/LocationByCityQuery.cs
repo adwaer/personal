@@ -8,7 +8,19 @@ namespace MQ.Cqrs.Query
 {
     public class LocationByCityQuery : IQuery<string, Task<IEnumerable<Location>>>
     {
-        private static readonly Dictionary<string, IEnumerable<Location>> CityLocationCacheDictionary = new Dictionary<string, IEnumerable<Location>>();
+        private static readonly Dictionary<string, IEnumerable<Location>> CityLocationCacheDictionary;
+
+        static LocationByCityQuery()
+        {
+            CityLocationCacheDictionary = new Dictionary<string, IEnumerable<Location>>();
+        }
+
+        private readonly EntityDataSet _entityDataSet;
+        public LocationByCityQuery(EntityDataSet entityDataSet)
+        {
+            _entityDataSet = entityDataSet;
+        }
+
 
         public async Task<IEnumerable<Location>> Execute(string city)
         {
@@ -32,8 +44,7 @@ namespace MQ.Cqrs.Query
             return await Task
                 .Run(() =>
                 {
-                    return EntityDataSet
-                        .Instance
+                    return _entityDataSet
                         .Locations
                         .Where(l => l.City == city);
                 });
