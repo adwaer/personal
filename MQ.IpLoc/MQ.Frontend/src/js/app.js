@@ -3,7 +3,7 @@
 
     window.app = window.angular.module('app',
         [
-            'ngResource', 'ngRoute', 'ui.bootstrap'
+            'ngResource', 'ngRoute', 'ui.bootstrap', 'requests'
         ])
         .config([
             '$routeProvider', function ($routeProvider) {

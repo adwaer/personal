@@ -53,6 +53,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="src\css\index.css" />
     <Content Include="src\js\app.js" />
+    <Content Include="src\js\resourceFactory.js" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

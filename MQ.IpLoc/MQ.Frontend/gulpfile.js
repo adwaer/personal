@@ -16,7 +16,7 @@ var destDir = "dist";
 var pathPrefix = "dist/";
 var siteUrl = "http://ps.ru/";
 
-gulp.task("bundle", ["bundle-clean", 'jade'], function () {
+gulp.task("bundle", ["bundle-clean", 'jade', 'settings'], function () {
     return gulp.src("./bundle.config.js")
         .pipe(bundle())
         .pipe(bundle.results({
@@ -60,6 +60,11 @@ gulp.task('jade', function () {
         }))
         .pipe(gulp.dest(destDir))
         .pipe(notify('Jade update'));
+});
+
+gulp.task('settings', function () {
+    return gulp.src('settings.json')
+      .pipe(gulp.dest('dist'));
 });
 
 function clean() {
