@@ -1,5 +1,5 @@
 angular
-    .module('requests')
+    .module('requests', [])
     .factory('resourceFactory', function ($resource) {
 
         $resource('settings.json')

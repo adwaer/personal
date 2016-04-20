@@ -72,7 +72,7 @@ function clean() {
     gulp.src(".").pipe(notify("cleanup finished"));
 }
 function watchBundles() {
-    gulp.watch([destDir + "/*.*", "src/js/**/*.js", "src/jade/**/*.jade"], ["reload-and-notify"]);
+    gulp.watch([destDir + "/*.*", "src/js/**/*.js", "src/jade/**/*.jade"], ["reload-and-notify", 'jade']);
 
     var destDirAbsolutePath = path.join(__dirname, destDir);
 

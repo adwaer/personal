@@ -1,5 +1,4 @@
 ﻿function initApplication() {
-    debugger;
 
     window.app = window.angular.module('app',
         [

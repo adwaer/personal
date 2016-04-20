@@ -24,7 +24,8 @@ module.exports = {
                 "bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"
             ],
             styles: [
-                "bower_components/angular-bootstrap/ui-bootstrap-csp.css"
+                "bower_components/angular-bootstrap/ui-bootstrap-csp.css",
+                "bower_components/bootstrap/dist/css/bootstrap.min.css"
             ],
             options: {
                 rev: false
