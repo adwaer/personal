@@ -54,7 +54,7 @@ gulp.task("reload-and-notify", function () {
 
 // jade
 gulp.task('jade', function () {
-    return gulp.src('src/jade/index.jade')
+    return gulp.src('src/jade/*.jade')
         .pipe(jade({
             pretty: true
         }))
