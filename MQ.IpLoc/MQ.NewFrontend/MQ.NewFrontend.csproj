@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{012BCB79-647A-4F24-9213-3F5519395518}</ProjectGuid>
+    <ProjectGuid>{97978E99-258C-4B1B-BF1B-220B1B9D4436}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MQ.Frontend</RootNamespace>
-    <AssemblyName>MQ.Frontend</AssemblyName>
+    <RootNamespace>MQ.NewFrontend</RootNamespace>
+    <AssemblyName>MQ.NewFrontend</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,21 +43,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bower.json" />
-    <None Include="package.json" />
-    <None Include="settings.json" />
-    <None Include="src\jade\index.jade" />
-    <None Include="src\jade\location_by_ip.jade" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bundle.config.js" />
     <Content Include="gulpfile.js" />
-    <Content Include="src\css\index.css" />
-    <Content Include="src\js\LocationModule.js" />
-    <Content Include="src\js\zapp.js" />
-    <Content Include="src\js\resourceFactory.js" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

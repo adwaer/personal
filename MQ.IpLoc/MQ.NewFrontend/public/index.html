@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Система пользовательских координат</title>
+    <meta id="viewport" name="viewport" content="initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" media="all" href="./css/vendor.css">
+    <link rel="stylesheet" media="all" href="./css/index.css">
+    <!-- vendor scripts-->
+    <script src="./js/vendor.js"></script>
+    <!-- app-->
+    <script src="./js/index.js"></script>
+  </head>
+</html>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header"><a href="#/index.html" class="navbar-brand">MetaQuotes</a></div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="#/locatiobyip">Поиск по IP<span class="sr-only"></span></a></li>
+          <li><a href="#">Поиск по Городу<span class="sr-only"></span></a></li>
+        </ul>
+      </div>
+      <div ng-view class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h class="page-header">Панель</h>
+      </div>
+    </div>
+  </div>
+</body>

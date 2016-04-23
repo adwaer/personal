@@ -5,14 +5,13 @@ html
 		title Система пользовательских координат
 		meta(id="viewport", name='viewport', content='initial-scale=1')
 		meta(name='format-detection', content='telephone=no')
-		link(rel='stylesheet', media='all', href='vendor.css')
-		link(rel='stylesheet', media='all', href='main.css')
+		link(rel='stylesheet', media='all', href='./css/vendor.css')
+		link(rel='stylesheet', media='all', href='./css/index.css')
 
-		//angular
-		script(src='vendor.js')
-		
-		//app
-		script(src='main.js')
+		// vendor scripts
+		script(src='./js/vendor.js')
+		// app
+		script(src='./js/index.js')
 body
 	nav.navbar.navbar-default.navbar-fixed-top
 		.container-fluid
@@ -26,7 +25,7 @@ body
 						a(href="#/locatiobyip") Поиск по IP
 							span.sr-only
 					li
-						a(href="#/index.html") Поиск по Городу
+						a(href="#") Поиск по Городу
 							span.sr-only
 					
 			.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main(ng-view)

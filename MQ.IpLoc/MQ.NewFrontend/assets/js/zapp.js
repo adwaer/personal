@@ -19,6 +19,7 @@
             }
         ]);
 
+    debugger;
     window.angular.bootstrap(document, ['app']);
 };
 

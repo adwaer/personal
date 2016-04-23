@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MQ.Frontend")]
+[assembly: AssemblyTitle("MQ.NewFrontend")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("sibiryak-soft")]
-[assembly: AssemblyProduct("MQ.Frontend")]
+[assembly: AssemblyProduct("MQ.NewFrontend")]
 [assembly: AssemblyCopyright("Copyright © sibiryak-soft 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("012bcb79-647a-4f24-9213-3f5519395518")]
+[assembly: Guid("97978e99-258c-4b1b-bf1b-220b1b9d4436")]
 
 // Version information for an assembly consists of the following four values:
 //
