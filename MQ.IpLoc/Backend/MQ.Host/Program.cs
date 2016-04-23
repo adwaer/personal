@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Threading;
 using Microsoft.Owin.Hosting;
-using MQ.Business;
 using MQ.Dal;
 using MQ.WebApi;
 
