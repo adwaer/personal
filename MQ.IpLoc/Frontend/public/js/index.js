@@ -62,7 +62,7 @@ var app = angular.module('app',
         'locations'
     ])
     .controller('DefaultCtrl', ['$scope', function ($scope) {
-        $scope.Hello = 'World';
+        $scope.Header = 'Панел управления';
     }])
     .config(['$routeProvider',
         function($routeProvider) {

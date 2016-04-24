@@ -114,3 +114,11 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.action_btn {
+  display: inline-block;
+  width: 400px;
+  height: 400px;
+  border: 1px solid #428BCA;
+  border-radius: 50%;
+}
