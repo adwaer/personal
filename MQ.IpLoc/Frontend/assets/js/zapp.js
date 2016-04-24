@@ -1,26 +1,32 @@
-﻿function initApplication() {
+﻿var app = angular.module('app',
+    ['ngResource',
+        'ngRoute',
+        'ui.bootstrap',
+        'requests',
+        'locations'
+    ])
+    .controller('DefaultCtrl', ['$scope', function ($scope) {
+        $scope.Hello = 'World';
+    }])
+    .config(['$routeProvider',
+        function($routeProvider) {
+            $routeProvider.
+            when('/index', {
+                templateUrl: 'default.html'
+            })
+            .otherwise({
+                redirectTo: '/index'
+            });
+        }]);
+//.config([
+//    '$httpProvider', function ($httpProvider) {
+//         $httpProvider.defaults.useXDomain = true;
+//           delete $httpProvider.defaults.headers.common['X-Requested-With'];
+//      }
+//]);
 
-    window.app = window.angular.module('app',
-        [
-            'ngResource', 'ngRoute', 'ui.bootstrap', 'requests'
-        ])
-        .config([
-            '$routeProvider', function ($routeProvider) {
-                $routeProvider
-                    .when('/', {
-                        templateUrl: 'index.html'
-                    });
-            }
-        ])
-        .config([
-            '$httpProvider', function ($httpProvider) {
-                $httpProvider.defaults.useXDomain = true;
-                delete $httpProvider.defaults.headers.common['X-Requested-With'];
-            }
-        ]);
 
-    debugger;
-    window.angular.bootstrap(document, ['app']);
-};
 
-angular.element(document).ready(initApplication);
+angular.element(document).ready(function () {
+    angular.bootstrap(document, ['app']);
+});

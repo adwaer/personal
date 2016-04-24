@@ -1,19 +1,15 @@
-var scripts = document.getElementsByTagName("script");
-var currentScriptPath = scripts[scripts.length - 1].src;
-
 angular
-    .module('locations', ['resourceFactory'])
+    .module('locations', [])
     .config([
         '$routeProvider', function ($routeProvider) {
             $routeProvider
                 .when('/locatiobyip/', {
                     templateUrl: '/location_by_ip.html',
-                    controller: currentScriptPath.replace('LocationModule.js', 'LocationByIpCtrl'),
                     reloadOnSearch: false
                 });
         }
     ])
-    .controller('LocationByIpCtrl', function ($scope, $routeParams, resourceFactory) {
+    .controller('LocationByIpCtrl', function ($scope, $routeParams) {
         $scope.Hello = 'Hello from LocationByIpCtrl';
     });
 angular
@@ -58,29 +54,35 @@ angular
 //.service('requestsService', function ($resource) {
 
 //})
-function initApplication() {
+var app = angular.module('app',
+    ['ngResource',
+        'ngRoute',
+        'ui.bootstrap',
+        'requests',
+        'locations'
+    ])
+    .controller('DefaultCtrl', ['$scope', function ($scope) {
+        $scope.Hello = 'World';
+    }])
+    .config(['$routeProvider',
+        function($routeProvider) {
+            $routeProvider.
+            when('/index', {
+                templateUrl: 'default.html'
+            })
+            .otherwise({
+                redirectTo: '/index'
+            });
+        }]);
+//.config([
+//    '$httpProvider', function ($httpProvider) {
+//         $httpProvider.defaults.useXDomain = true;
+//           delete $httpProvider.defaults.headers.common['X-Requested-With'];
+//      }
+//]);
 
-    window.app = window.angular.module('app',
-        [
-            'ngResource', 'ngRoute', 'ui.bootstrap', 'requests'
-        ])
-        .config([
-            '$routeProvider', function ($routeProvider) {
-                $routeProvider
-                    .when('/', {
-                        templateUrl: 'index.html'
-                    });
-            }
-        ])
-        .config([
-            '$httpProvider', function ($httpProvider) {
-                $httpProvider.defaults.useXDomain = true;
-                delete $httpProvider.defaults.headers.common['X-Requested-With'];
-            }
-        ]);
 
-    debugger;
-    window.angular.bootstrap(document, ['app']);
-};
 
-angular.element(document).ready(initApplication);
+angular.element(document).ready(function () {
+    angular.bootstrap(document, ['app']);
+});

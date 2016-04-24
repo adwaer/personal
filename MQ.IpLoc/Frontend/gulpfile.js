@@ -12,17 +12,7 @@
     server = lr(),
     serveStatic = require('serve-static');;
 
-gulp.task('stylus', function() {
-    gulp.src('./assets/stylus/**/*.css')
-        .pipe(stylus({
-            use: ['nib']
-        })) // собираем stylus
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
-        .pipe(myth()) // добавляем префиксы - http://www.myth.io/
-        .pipe(gulp.dest('./public/css/')) // записываем css
-        .pipe(livereload(server)); // даем команду на перезагрузку css
-});
-
+// Собираем vendor css
 gulp.task('stylus_vendor', function() {
     gulp.src([
             './node_modules/angular-bootstrap/ui-bootstrap-csp.css',
@@ -38,28 +28,6 @@ gulp.task('stylus_vendor', function() {
         .pipe(livereload(server)); // даем команду на перезагрузку css
 });
 
-// Собираем html из Jade
-
-gulp.task('jade', function() {
-    gulp.src(['./assets/template/*.jade', '!./assets/template/_*.jade'])
-        .pipe(jade({
-            pretty: true
-        }))  // Собираем Jade только в папке ./assets/template/ исключая файлы с _*
-        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
-        .pipe(gulp.dest('./public/')) // Записываем собранные файлы
-        .pipe(livereload(server)); // даем команду на перезагрузку страницы
-});
-
-
-
-// Собираем JS
-gulp.task('js', function() {
-    gulp.src(['./assets/js/**/*.js', '!./assets/js/vendor/**/*.js'])
-        .pipe(concat('index.js')) // Собираем все JS, кроме тех которые находятся в ./assets/js/vendor/**
-        .pipe(gulp.dest('./public/js'))
-        .pipe(livereload(server)); // даем команду на перезагрузку страницы
-});
-
 // Собираем vendor JS
 gulp.task('js_vendor', function() {
     gulp.src(['./node_modules/jquery/dist/jquery.min.js',
@@ -72,8 +40,38 @@ gulp.task('js_vendor', function() {
         .pipe(livereload(server)); // даем команду на перезагрузку страницы
 });
 
-// Копируем и минимизируем изображения
+// Собираем html из Jade
+gulp.task('jade', function() {
+    gulp.src(['./assets/template/*.jade', '!./assets/template/_*.jade'])
+        .pipe(jade({
+            pretty: true
+        }))  // Собираем Jade только в папке ./assets/template/ исключая файлы с _*
+        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .pipe(gulp.dest('./public/')) // Записываем собранные файлы
+        .pipe(livereload(server)); // даем команду на перезагрузку страницы
+});
 
+// Собираем css
+gulp.task('stylus', function() {
+    gulp.src('./assets/stylus/**/*.css')
+        .pipe(stylus({
+            use: ['nib']
+        })) // собираем stylus
+        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .pipe(myth()) // добавляем префиксы - http://www.myth.io/
+        .pipe(gulp.dest('./public/css/')) // записываем css
+        .pipe(livereload(server)); // даем команду на перезагрузку css
+});
+
+// Собираем JS
+gulp.task('js', function() {
+    gulp.src(['./assets/js/**/*.js', '!./assets/js/vendor/**/*.js'])
+        .pipe(concat('index.js')) // Собираем все JS, кроме тех которые находятся в ./assets/js/vendor/**
+        .pipe(gulp.dest('./public/js'))
+        .pipe(livereload(server)); // даем команду на перезагрузку страницы
+});
+
+// Копируем и минимизируем изображения
 gulp.task('images', function() {
     gulp.src('./assets/img/**/*')
         .pipe(imagemin())
@@ -171,4 +169,4 @@ gulp.task('build', function() {
 
 });
 
-gulp.task('default', ['watch'], function () { });
+gulp.task('default', ['http-server'], function () { });
