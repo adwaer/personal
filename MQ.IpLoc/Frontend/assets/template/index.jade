@@ -19,12 +19,12 @@ body
 				a.navbar-brand(href="#/") MetaQuotes
 	.container-fluid
 		.row
-			.col-sm-3.col-md-2.sidebar
+			.col-sm-3.col-md-2.sidebar(ng-controller="SidebarCtrl")
 				ul.nav.nav-sidebar
-					li.active
+					li(ng-class="{ active: isActive('#/locatiobyip/') }")
 						a(href="#/locatiobyip") Поиск по IP
 							span.sr-only
-					li
+					li(ng-class="{ active: isActive('#/locatiosbycity/') }")
 						a(href="#") Поиск по Городу
 							span.sr-only
 					

@@ -78,6 +78,12 @@ gulp.task('images', function() {
         .pipe(gulp.dest('./public/img'))
 });
 
+// Копируем настройки
+gulp.task('settings', function() {
+    gulp.src('./assets/settings.json')
+        .pipe(gulp.dest('./public'))
+});
+
 // Локальный сервер для разработки
 gulp.task('http-server', function() {
     var app = connect();
@@ -97,6 +103,7 @@ gulp.task('watch', function() {
     gulp.run('images');
     gulp.run('js');
     gulp.run('js_vendor');
+    gulp.run('settings');
 
     // Подключаем Livereload
     server.listen(35729, function(err) {
@@ -167,6 +174,9 @@ gulp.task('build', function() {
         .pipe(imagemin())
         .pipe(gulp.dest('./build/img'))
 
+    // settings
+    gulp.src('./assets/settings.json')
+        .pipe(gulp.dest('./build'))
 });
 
 gulp.task('default', ['http-server'], function () { });

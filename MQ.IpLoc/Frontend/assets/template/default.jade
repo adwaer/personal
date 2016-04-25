@@ -1,12 +1,14 @@
 div(ng-controller='DefaultCtrl')
-    h1.page-header {{Header}}
+    h1.page-header Панель управления
     .row.placeholders
-        .col-xs-6.col-sm-6.placeholder
-            //img.img-responsive(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' style='width:400px;height:400px')
-            .action_btn
-                IP
-            h4 Координаты по IP
-        .col-xs-6.col-sm-6.placeholder
-            //img.img-responsive(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' style='width:400px;height:400px')
-            .action_btn
+        a.col-xs-6.col-sm-6.placeholder(href="#/locatiobyip")
+            section.stage
+                figure.ball
+                    span.shadow
             h4 Координаты по Городу
+        a.col-xs-6.col-sm-6.placeholder(href="#/locatiobyip")
+            section.stage
+                figure.eye
+                    span.shadow
+                    span.iris
+            h4 Координаты по IP

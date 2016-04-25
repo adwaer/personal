@@ -1,5 +1,5 @@
 angular
-    .module('locations', [])
+    .module('locations', ['requests'])
     .config([
         '$routeProvider', function ($routeProvider) {
             $routeProvider
@@ -9,51 +9,44 @@ angular
                 });
         }
     ])
-    .controller('LocationByIpCtrl', function ($scope, $routeParams) {
-        $scope.Hello = 'Hello from LocationByIpCtrl';
+    .controller('LocationByIpCtrl', function ($scope, resourceFactory) {
+        $scope.searchPattern = '';
+        $scope.search = function(){
+            $scope.LocationApi.query( { id: $scope.searchPattern}, function(data){
+                    console.log(data);
+                });
+        };
+
+        function ctor() {
+            $scope.LocationApi = resourceFactory
+                .$promise
+                .then(function (config) {
+                    console.log(config);
+                    return config.getFor('ip/location/:id', {id: '@id'});
+                });
+        }
+        ctor();
     });
 angular
     .module('requests', [])
     .factory('resourceFactory', function ($resource) {
 
-        $resource('settings.json')
-            .get(function (data) {
-                console.log(data);
-            });
-
         return {
-            getFor: function (entityType, config) {
-                if (!config) {
-                    config = {
-                        url: '',
-                        params: {},
-                    };
-                } else {
-                    if (!config.params) {
-                        throw "config must look like this: {url: ':id', { 'id': '@id'}}";
-                    }
-                }
-
-                // TODO: provide debug json fallback here
-                return $resource(serviceHost + '/api/' + entityType + '/' + config.url, config.params, {
-                    query: {
-                        method: 'GET',
-                        isArray: true
-                    },
-                    update: {
-                        method: 'PUT'
-                    }
-                });
+            serviceHost: function(){
+                return $resource('settings.json')
+                    .get(function (data) {
+                        return data.host;
+                    });
             },
-            displayFor: function (entityType) {
-                // TODO: provide debug json fallback here
-                return $resource('/api/metadata/displaynames/' + entityType);
+            getFor: function (uri) {
+                this.serviceHost()
+                    .$promise
+                    .then(function (serviceHost) {
+                        return $resource(serviceHost + uri);
+                    });
             }
         };
     });
-//.service('requestsService', function ($resource) {
-
-//})
 var app = angular.module('app',
     ['ngResource',
         'ngRoute',
@@ -63,6 +56,11 @@ var app = angular.module('app',
     ])
     .controller('DefaultCtrl', ['$scope', function ($scope) {
         $scope.Header = 'Панел управления';
+    }])
+    .controller('SidebarCtrl', ['$scope', function ($scope) {
+        $scope.isActive = function(hash){
+            return location.hash == hash;
+        };
     }])
     .config(['$routeProvider',
         function($routeProvider) {

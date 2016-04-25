@@ -51,6 +51,18 @@ body {
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
+
+  .sidebar:after {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #959595;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    content: "Навигация";
+  }
 }
 
 /* Sidebar navigation */
@@ -72,6 +84,10 @@ body {
 .nav-sidebar > .active > a:focus {
   color: #fff;
   background-color: #428bca;
+}
+
+.nav li {
+  top: 20px;
 }
 
 /*
@@ -115,10 +131,247 @@ body {
   border-radius: 50%;
 }
 
-.action_btn {
+.ball {
   display: inline-block;
-  width: 400px;
-  height: 400px;
-  border: 1px solid #428BCA;
+  width: 100%;
+  height: 100%;
+  margin: 0;
   border-radius: 50%;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  background: url('http://hop.ie/balls/images/world-map-one-color.png') repeat-x;
+  background-size: auto 100%;
+  -webkit-animation: move-map 30s infinite linear;
+  animation: move-map 30s infinite linear;
+}
+
+.ball:before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: -40px 10px 70px 10px rgba(0,0,0,0.5) inset;
+  z-index: 2;
+}
+
+.ball:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-filter: blur(0);
+  opacity: 0.3;
+  background: -webkit-radial-gradient(50% 80%, circle, #81e8f6, #76deef 10%, #055194 66%, #062745 100%);
+  background: radial-gradient(circle at 50% 80%, #81e8f6, #76deef 10%, #055194 66%, #062745 100%);
+}
+
+.ball .shadow,
+.eye .shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: -webkit-radial-gradient(50% 50%, circle, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+  -webkit-transform: rotateX(90deg) translateZ(-150px);
+  transform: rotateX(90deg) translateZ(-150px);
+  z-index: -1;
+  left: 0;
+}
+
+.eye {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 50%;
+  position: relative;
+  background: -webkit-radial-gradient(50% 40%, circle, #fcfcfc, #efeff1 66%, #9b5050 100%);
+  background: radial-gradient(circle at 50% 40%, #fcfcfc, #efeff1 66%, #9b5050 100%);
+}
+
+.eye:after {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: -webkit-radial-gradient(50% 50%, circle, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) 14%, rgba(255, 255, 255, 0) 24%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) 14%, rgba(255, 255, 255, 0) 24%);
+  -webkit-transform: translateX(-80px) translateY(-90px) skewX(-20deg);
+  transform: translateX(-80px) translateY(-90px) skewX(-20deg);
+}
+
+.stage {
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  margin: 20px;
+  -webkit-perspective: 1200px;
+  -ms-perspective: 1200px;
+  -o-perspective: 1200px;
+  perspective: 1200px;
+  -webkit-perspective-origin: 50% 50%;
+  -ms-perspective-origin: 50% 50%;
+  -o-perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
+}
+
+.stage:hover {
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.iris {
+  width: 40%;
+  height: 40%;
+  margin: 30%;
+  border-radius: 50%;
+  background: -webkit-radial-gradient(50% 50%, circle, #208ab4 0%, #6fbfff 30%, #4381b2 100%);
+  background: radial-gradient(circle at 50% 50%, #208ab4 0%, #6fbfff 30%, #4381b2 100%);
+  -webkit-transform: translateX(68px) translateY(-60px) skewX(15deg) skewY(2deg);
+  transform: translateX(68px) translateY(-60px) skewX(15deg) skewY(2deg);
+  position: absolute;
+  -webkit-animation: move-eye-skew 5s ease-out infinite;
+  animation: move-eye-skew 5s ease-out infinite;
+  left: 0;
+}
+
+.iris:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 37.5%;
+  height: 37.5%;
+  border-radius: 50%;
+  top: 31.25%;
+  left: 31.25%;
+  background: black;
+}
+
+.iris:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 31.25%;
+  height: 31.25%;
+  border-radius: 50%;
+  top: 18.75%;
+  left: 18.75%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@-webkit-keyframes move-map {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -849px 0;
+  }
+}
+
+@keyframes move-map {
+  0% {
+    background-position: -849px 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@-webkit-keyframes move-eye-skew {
+  0% {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  20% {
+    -webkit-transform: translateX(-68px) translateY(30px) skewX(15deg) skewY(-10deg) scale(0.95);
+    transform: translateX(-68px) translateY(30px) skewX(15deg) skewY(-10deg) scale(0.95);
+  }
+
+  25%, 44% {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  50%, 60% {
+    -webkit-transform: translateX(68px) translateY(-40px) skewX(5deg) skewY(2deg) scaleX(0.95);
+    transform: translateX(68px) translateY(-40px) skewX(5deg) skewY(2deg) scaleX(0.95);
+  }
+
+  66%, 100% {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes move-eye-skew {
+  0% {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  20% {
+    -webkit-transform: translateX(-68px) translateY(30px) skewX(15deg) skewY(-10deg) scale(0.95);
+    transform: translateX(-68px) translateY(30px) skewX(15deg) skewY(-10deg) scale(0.95);
+  }
+
+  25%, 44% {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  50%, 60% {
+    -webkit-transform: translateX(68px) translateY(-40px) skewX(5deg) skewY(2deg) scaleX(0.95);
+    transform: translateX(68px) translateY(-40px) skewX(5deg) skewY(2deg) scaleX(0.95);
+  }
+
+  66%, 100% {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.search-form {
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 0 -15px 15px;
+  border-color: #e5e5e5 #eee #eee;
+  border-style: solid;
+  border-width: 1px 0;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+}
+
+.search-form:after {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  content: "Поиск";
+}
+
+@media (min-width: 768px) {
+  .search-form {
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+  }
 }

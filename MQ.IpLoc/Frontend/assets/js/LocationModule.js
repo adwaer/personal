@@ -1,5 +1,5 @@
 ﻿angular
-    .module('locations', [])
+    .module('locations', ['requests'])
     .config([
         '$routeProvider', function ($routeProvider) {
             $routeProvider
@@ -9,6 +9,21 @@
                 });
         }
     ])
-    .controller('LocationByIpCtrl', function ($scope, $routeParams) {
-        $scope.Hello = 'Hello from LocationByIpCtrl';
+    .controller('LocationByIpCtrl', function ($scope, resourceFactory) {
+        $scope.searchPattern = '';
+        $scope.search = function(){
+            $scope.LocationApi.query( { id: $scope.searchPattern}, function(data){
+                    console.log(data);
+                });
+        };
+
+        function ctor() {
+            $scope.LocationApi = resourceFactory
+                .$promise
+                .then(function (config) {
+                    console.log(config);
+                    return config.getFor('ip/location/:id', {id: '@id'});
+                });
+        }
+        ctor();
     });

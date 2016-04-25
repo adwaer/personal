@@ -8,6 +8,11 @@
     .controller('DefaultCtrl', ['$scope', function ($scope) {
         $scope.Header = 'Панел управления';
     }])
+    .controller('SidebarCtrl', ['$scope', function ($scope) {
+        $scope.isActive = function(hash){
+            return location.hash == hash;
+        };
+    }])
     .config(['$routeProvider',
         function($routeProvider) {
             $routeProvider.
