@@ -12,32 +12,10 @@
     </div>
   </form>
   <h3 class="sub-header">Результаты поиска</h3>
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Страна</th>
-          <th>Регион</th>
-          <th>Индекс</th>
-          <th>Город</th>
-          <th>Организация</th>
-          <th>Широта</th>
-          <th>Долгота</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Россия</td>
-          <td>Татарстан</td>
-          <td>343242</td>
-          <td>Казань</td>
-          <td>Хай Тек</td>
-          <td>123</td>
-          <td>-342</td>
-        </tr>
-      </tbody>
-    </table>
+  <div style="min-height: 500px" ng-class="{ loading: isLoading }">
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+    <div ng-google-map="ng-google-map" ng-model="currentLocation" style="min-height: 500px"></div>
   </div>
 </div>

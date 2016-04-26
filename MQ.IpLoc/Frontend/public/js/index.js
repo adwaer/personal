@@ -11,18 +11,31 @@ angular
     ])
     .controller('LocationByIpCtrl', function ($scope, resourceFactory) {
         $scope.searchPattern = '';
-        $scope.search = function(){
-            $scope.LocationApi.query( { id: $scope.searchPattern}, function(data){
-                    console.log(data);
+        $scope.currentLocation = undefined;
+        $scope.isLoading = false;
+
+        $scope.search = function() {
+            $scope.currentLocation = undefined;
+            $scope.isLoading = true;
+
+            $scope.LocationApi.get({id: $scope.searchPattern})
+                .$promise
+                .then(function (data) {
+                    $scope.currentLocation = data;
+                })
+                .catch(function(){
+                    alert('Произошла ошибка, обратитесь в поддержку или попробуйте позже');
+                })
+                .finally(function(){
+                    $scope.isLoading = false;
                 });
         };
 
         function ctor() {
-            $scope.LocationApi = resourceFactory
-                .$promise
-                .then(function (config) {
-                    console.log(config);
-                    return config.getFor('ip/location/:id', {id: '@id'});
+            resourceFactory
+                .getFor('ip/location/:id', {id: '@id'})
+                .then(function(resource){
+                    $scope.LocationApi = resource;
                 });
         }
         ctor();
@@ -31,18 +44,24 @@ angular
     .module('requests', [])
     .factory('resourceFactory', function ($resource) {
 
+        var config = undefined;
         return {
             serviceHost: function(){
-                return $resource('settings.json')
+                if(config){
+                    return config;
+                }
+
+                config = $resource('settings.json')
                     .get(function (data) {
                         return data.host;
                     });
+                return config;
             },
             getFor: function (uri) {
-                this.serviceHost()
+                return this.serviceHost()
                     .$promise
-                    .then(function (serviceHost) {
-                        return $resource(serviceHost + uri);
+                    .then(function (config) {
+                        return $resource(config.host + uri);
                     });
             }
         };
@@ -52,7 +71,8 @@ var app = angular.module('app',
         'ngRoute',
         'ui.bootstrap',
         'requests',
-        'locations'
+        'locations',
+        'ngGoogleMap'
     ])
     .controller('DefaultCtrl', ['$scope', function ($scope) {
         $scope.Header = 'Панел управления';
@@ -84,3 +104,42 @@ var app = angular.module('app',
 angular.element(document).ready(function () {
     angular.bootstrap(document, ['app']);
 });
+angular
+    .module('ngGoogleMap', [])
+    .directive('ngGoogleMap', function($parse) {
+        var map, marker;
+
+        return {
+            link: function (scope, element, attributes, model) {
+                map = new google.maps.Map(element[0], {
+                    center: { lat: 55.763585, lng: 37.560883 },
+                    zoom: 7
+                });
+
+                model.$formatters.push(positionRenderer)
+            },
+            scope: true,
+            restrict: 'AE',
+            require: 'ngModel',
+        };
+
+        function positionRenderer(value) {
+            if(!value){
+                return value;
+            }
+            var coords = new google.maps.LatLng(value.Lat, value.Lon);
+
+            if(marker){
+                marker.setMap(null);
+            }
+            marker = new google.maps.Marker({
+                position: coords,
+                map: map,
+                title:"Hello World!"
+            });
+            map.setCenter(coords);
+            //map.setCenter(pos);
+
+            return value;
+        }
+    });

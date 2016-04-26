@@ -3,7 +3,8 @@
         'ngRoute',
         'ui.bootstrap',
         'requests',
-        'locations'
+        'locations',
+        'ngGoogleMap'
     ])
     .controller('DefaultCtrl', ['$scope', function ($scope) {
         $scope.Header = 'Панел управления';

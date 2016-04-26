@@ -35,9 +35,8 @@ gulp.task('js_vendor', function() {
             './node_modules/angular-route/angular-route.min.js',
             './node_modules/angular-resource/angular-resource.min.js',
             './node_modules/angular-bootstrap/ui-bootstrap-tpls.min.js'])
-        .pipe(concat('vendor.js')) // Собираем все JS, кроме тех которые находятся в ./assets/js/vendor/**
+        .pipe(concat('vendor.js'))
         .pipe(gulp.dest('./public/js'))
-        .pipe(livereload(server)); // даем команду на перезагрузку страницы
 });
 
 // Собираем html из Jade
@@ -48,7 +47,6 @@ gulp.task('jade', function() {
         }))  // Собираем Jade только в папке ./assets/template/ исключая файлы с _*
         .on('error', console.log) // Если есть ошибки, выводим и продолжаем
         .pipe(gulp.dest('./public/')) // Записываем собранные файлы
-        .pipe(livereload(server)); // даем команду на перезагрузку страницы
 });
 
 // Собираем css
@@ -140,7 +138,7 @@ gulp.task('build', function() {
         .pipe(gulp.dest('./build/css/')) // записываем css
 
     // css
-    gulp.src('./assets/stylus/*.css')
+    gulp.src('./assets/stylus/**/*.css')
         .pipe(stylus({
             use: ['nib']
         })) // собираем stylus

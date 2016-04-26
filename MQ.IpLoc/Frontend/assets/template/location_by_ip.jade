@@ -1,4 +1,8 @@
-﻿div(ng-controller='LocationByIpCtrl')
+﻿mixin loader
+    div.loading-overlay
+        div.spinner
+
+div(ng-controller='LocationByIpCtrl')
     h1.page-header Местоположение пользователя по IP
     form.search-form(ng-submit="search()")
         .row
@@ -9,25 +13,6 @@
                         button.btn.btn-default(type="submit") Искать
 
     h3.sub-header Результаты поиска
-    .table-responsive
-        table.table.table-striped
-            thead
-                tr
-                    th #
-                    th Страна
-                    th Регион
-                    th Индекс
-                    th Город
-                    th Организация
-                    th Широта
-                    th Долгота
-            tbody
-                tr
-                    td 1
-                    td Россия
-                    td Татарстан
-                    td 343242
-                    td Казань
-                    td Хай Тек
-                    td 123
-                    td -342
+    div(style="min-height: 500px" ng-class="{ loading: isLoading }")
+        +loader
+        div(ng-google-map ng-model="currentLocation" style="min-height: 500px")

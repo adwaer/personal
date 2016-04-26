@@ -1,0 +1,33 @@
+﻿div(ng-controller='LocationsByCityCtrl')
+    h1.page-header Местоположение пользователя по Городу
+    form.search-form(ng-submit="search()")
+        .row
+            .col-lg-6
+                .input-group
+                    input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern")
+                    span.input-group-btn
+                        button.btn.btn-default(type="submit") Искать
+
+    h3.sub-header Результаты поиска
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th #
+                    th Страна
+                    th Регион
+                    th Индекс
+                    th Город
+                    th Организация
+                    th Широта
+                    th Долгота
+            tbody
+                tr
+                    td 1
+                    td Россия
+                    td Татарстан
+                    td 343242
+                    td Казань
+                    td Хай Тек
+                    td 123
+                    td -342

@@ -1,0 +1,49 @@
+.loading-overlay {
+    display: none;
+}
+
+.loading .loading-overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    background: rgba(255,255,255,.6);
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    z-index: 30;
+}
+
+.loading .loading-overlay .spinner {
+    -webkit-animation: rotate 0.8s infinite linear;
+    -moz-animation: rotate 0.8s infinite linear;
+    -ms-animation: rotate 0.8s infinite linear;
+    -o-animation: rotate 0.8s infinite linear;
+    animation: rotate 0.8s infinite linear;
+    border: 8px solid #000028;
+    border-right-color: transparent;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    margin-top: -25px;
+}
+
+.aside_container .loading .loading-overlay {
+    background: rgba(69, 69, 69, 0.45);
+}
+
+.aside_container .loading .loading-overlay .spinner {
+    border: 8px solid #E7E7E7;
+    border-right-color: transparent;
+}
+
+@keyframes rotate {
+    0%    { transform: rotate(0deg); }
+    100%  { transform: rotate(360deg); }
+}

@@ -11,18 +11,31 @@
     ])
     .controller('LocationByIpCtrl', function ($scope, resourceFactory) {
         $scope.searchPattern = '';
-        $scope.search = function(){
-            $scope.LocationApi.query( { id: $scope.searchPattern}, function(data){
-                    console.log(data);
+        $scope.currentLocation = undefined;
+        $scope.isLoading = false;
+
+        $scope.search = function() {
+            $scope.currentLocation = undefined;
+            $scope.isLoading = true;
+
+            $scope.LocationApi.get({id: $scope.searchPattern})
+                .$promise
+                .then(function (data) {
+                    $scope.currentLocation = data;
+                })
+                .catch(function(){
+                    alert('Произошла ошибка, обратитесь в поддержку или попробуйте позже');
+                })
+                .finally(function(){
+                    $scope.isLoading = false;
                 });
         };
 
         function ctor() {
-            $scope.LocationApi = resourceFactory
-                .$promise
-                .then(function (config) {
-                    console.log(config);
-                    return config.getFor('ip/location/:id', {id: '@id'});
+            resourceFactory
+                .getFor('ip/location/:id', {id: '@id'})
+                .then(function(resource){
+                    $scope.LocationApi = resource;
                 });
         }
         ctor();

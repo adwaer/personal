@@ -2,18 +2,24 @@ angular
     .module('requests', [])
     .factory('resourceFactory', function ($resource) {
 
+        var config = undefined;
         return {
             serviceHost: function(){
-                return $resource('settings.json')
+                if(config){
+                    return config;
+                }
+
+                config = $resource('settings.json')
                     .get(function (data) {
                         return data.host;
                     });
+                return config;
             },
             getFor: function (uri) {
-                this.serviceHost()
+                return this.serviceHost()
                     .$promise
-                    .then(function (serviceHost) {
-                        return $resource(serviceHost + uri);
+                    .then(function (config) {
+                        return $resource(config.host + uri);
                     });
             }
         };
