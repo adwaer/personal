@@ -50,14 +50,15 @@ namespace MQ.Host
         static void StartDelay(int seconds)
         {
             Console.WriteLine("Starting in  ");
+            Console.CursorTop--;
             for (int i = seconds; i > 0; i--)
             {
-                Console.SetCursorPosition(12, 0);
+                Console.CursorLeft = 12;
                 Console.Write($"{i}..");
                 Thread.Sleep(1000);
             }
 
-            Console.SetCursorPosition(12, 0);
+            Console.CursorLeft = 12;
             Console.Write(".. started!");
             Console.WriteLine();
         }
