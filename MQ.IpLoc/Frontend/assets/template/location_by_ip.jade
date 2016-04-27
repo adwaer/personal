@@ -8,7 +8,7 @@ div(ng-controller='LocationByIpCtrl')
         .row
             .col-lg-6
                 .input-group
-                    input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern")
+                    input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern" pattern="^(10|172|192)\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$" title="IP адрес не валиден")
                     span.input-group-btn
                         button.btn.btn-default(type="submit") Искать
 

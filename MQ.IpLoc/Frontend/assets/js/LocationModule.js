@@ -24,7 +24,7 @@
                     $scope.currentLocation = data;
                 })
                 .catch(function(){
-                    alert('Произошла ошибка, обратитесь в поддержку или попробуйте позже');
+                    alert('Произошла ошибка, возможно вы ввели некорректные данные');
                 })
                 .finally(function(){
                     $scope.isLoading = false;
