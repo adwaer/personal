@@ -1,8 +1,7 @@
 angular
     .module('ngGoogleMap', [])
     .directive('ngGoogleMap', function($parse) {
-        var map, marker;
-
+        var map = undefined, marker;
         return {
             link: function (scope, element, attributes, model) {
                 map = new google.maps.Map(element[0], {

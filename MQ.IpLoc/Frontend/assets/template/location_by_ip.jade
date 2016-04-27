@@ -1,6 +1,4 @@
-﻿mixin loader
-    div.loading-overlay
-        div.spinner
+﻿include mixins
 
 div(ng-controller='LocationByIpCtrl')
     h1.page-header Местоположение пользователя по IP
@@ -8,7 +6,7 @@ div(ng-controller='LocationByIpCtrl')
         .row
             .col-lg-6
                 .input-group
-                    input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern" pattern="^(10|172|192)\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$" title="IP адрес не валиден")
+                    input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern" required)
                     span.input-group-btn
                         button.btn.btn-default(type="submit") Искать
 

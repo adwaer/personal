@@ -34,7 +34,7 @@ gulp.task('js_vendor', function() {
             './node_modules/angular/angular.min.js',
             './node_modules/angular-route/angular-route.min.js',
             './node_modules/angular-resource/angular-resource.min.js',
-            './node_modules/angular-bootstrap/ui-bootstrap-tpls.min.js'])
+            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js'])
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('./public/js'))
 });
@@ -156,7 +156,7 @@ gulp.task('build', function() {
             './node_modules/angular/angular.min.js',
             './node_modules/angular-route/angular-route.min.js',
             './node_modules/angular-resource/angular-resource.min.js',
-            './node_modules/angular-bootstrap/ui-bootstrap-tpls.min.js'])
+            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js'])
         .pipe(concat('vendor.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./build/js'));

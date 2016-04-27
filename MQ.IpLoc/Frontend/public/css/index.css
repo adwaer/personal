@@ -375,3 +375,7 @@ body {
     box-shadow: none;
   }
 }
+
+.label-info {
+  cursor: pointer;
+}

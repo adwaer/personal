@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MQ.Dal;
@@ -46,7 +47,7 @@ namespace MQ.Cqrs.Query
                 {
                     return _entityDataSet
                         .Locations
-                        .Where(l => l.City == city);
+                        .Where(l => l.City.Trim().Equals(city, StringComparison.Ordinal));
                 });
         }
     }
