@@ -5,6 +5,8 @@ div(ng-controller='LocationsByCityCtrl')
     form.search-form(ng-submit="search()")
         .row
             .col-lg-6
+                .alert.alert-danger(role="alert" ng-show="Error")
+                    a.alert-link {{Error}}
                 .input-group
                     input.form-control(placeholder="Введите название города" ng-model="searchPattern")
                     span.input-group-btn
@@ -13,7 +15,9 @@ div(ng-controller='LocationsByCityCtrl')
     h3.sub-header Результаты поиска
     .table-responsive(ng-class="{ loading: isLoading }")
         +loader
-        table.table.table-striped
+        .alert.alert-info(role="alert" ng-hide="rows.length")
+            .alert-link Отсутствуют данные
+        table.table.table-striped(ng-show="rows.length")
             thead
                 tr
                     th #

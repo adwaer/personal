@@ -5,6 +5,8 @@ div(ng-controller='LocationByIpCtrl')
     form.search-form(ng-submit="search()")
         .row
             .col-lg-6
+                .alert.alert-danger(role="alert" ng-show="Error")
+                    .alert-link {{Error}}
                 .input-group
                     input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern" required)
                     span.input-group-btn
@@ -13,4 +15,6 @@ div(ng-controller='LocationByIpCtrl')
     h3.sub-header Результаты поиска
     div(style="min-height: 500px" ng-class="{ loading: isLoading }")
         +loader
-        div(ng-google-map ng-model="currentLocation" style="min-height: 500px")
+        .alert.alert-info(role="alert" ng-hide="currentLocation")
+            .alert-link Отсутствуют данные
+        div(ng-google-map ng-model="currentLocation" style="min-height: 500px" ng-show="currentLocation")

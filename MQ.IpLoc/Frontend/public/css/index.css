@@ -379,3 +379,11 @@ body {
 .label-info {
   cursor: pointer;
 }
+
+.navbar-header {
+  padding-left: 10px;
+}
+
+.navbar-header:hover {
+  background: rgba(128, 128, 128, 0.07);
+}

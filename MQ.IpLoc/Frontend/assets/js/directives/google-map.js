@@ -8,7 +8,6 @@ angular
                     center: { lat: 55.763585, lng: 37.560883 },
                     zoom: 7
                 });
-				var marker;
 
                 model.$formatters.push(function(value) {
 					return positionRenderer(value, map);
@@ -23,7 +22,7 @@ angular
             if(!value){
                 return value;
             }
-            var coords = new google.maps.LatLng(value.Lat, value.Lon);
+            var coords = { lat: value.Lat, lng: value.Lon };
 
             if(marker){
                 marker.setMap(null);
@@ -33,9 +32,8 @@ angular
                 map: map,
                 title:"Hello World!"
             });
-            map.setCenter(coords);
 			google.maps.event.trigger(map, 'resize')
-            //map.setCenter(pos);
+            map.setCenter(coords);
 
             return value;
         }

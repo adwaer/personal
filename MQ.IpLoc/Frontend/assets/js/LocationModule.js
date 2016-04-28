@@ -21,6 +21,7 @@
         $scope.search = function() {
             $scope.currentLocation = undefined;
             $scope.isLoading = true;
+            $scope.Error = 0;
 
             $scope.LocationApi.get({id: $scope.searchPattern})
                 .$promise
@@ -28,7 +29,7 @@
                     $scope.currentLocation = data;
                 })
                 .catch(function(){
-                    alert('Произошла ошибка, возможно вы ввели некорректные данные');
+                    $scope.Error = 'Произошла ошибка, возможно вы ввели некорректные данные';
                 })
                 .finally(function(){
                     $scope.isLoading = false;
@@ -50,8 +51,9 @@
         $scope.isLoading = false;
 
         $scope.search = function() {
-            $scope.rows = undefined;
+            $scope.rows = [];
             $scope.isLoading = true;
+            $scope.Error = 0;
 
             $scope.LocationApi.query({id: $scope.searchPattern})
                 .$promise
@@ -59,7 +61,7 @@
                     $scope.rows = data;
                 })
                 .catch(function(){
-                    alert('Произошла ошибка, возможно вы ввели некорректные данные');
+                    $scope.Error = 'Произошла ошибка, возможно вы ввели некорректные данные';
                 })
                 .finally(function(){
                     $scope.isLoading = false;

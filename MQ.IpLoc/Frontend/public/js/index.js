@@ -21,6 +21,7 @@ angular
         $scope.search = function() {
             $scope.currentLocation = undefined;
             $scope.isLoading = true;
+            $scope.Error = 0;
 
             $scope.LocationApi.get({id: $scope.searchPattern})
                 .$promise
@@ -28,7 +29,7 @@ angular
                     $scope.currentLocation = data;
                 })
                 .catch(function(){
-                    alert('Произошла ошибка, возможно вы ввели некорректные данные');
+                    $scope.Error = 'Произошла ошибка, возможно вы ввели некорректные данные';
                 })
                 .finally(function(){
                     $scope.isLoading = false;
@@ -50,8 +51,9 @@ angular
         $scope.isLoading = false;
 
         $scope.search = function() {
-            $scope.rows = undefined;
+            $scope.rows = [];
             $scope.isLoading = true;
+            $scope.Error = 0;
 
             $scope.LocationApi.query({id: $scope.searchPattern})
                 .$promise
@@ -59,7 +61,7 @@ angular
                     $scope.rows = data;
                 })
                 .catch(function(){
-                    alert('Произошла ошибка, возможно вы ввели некорректные данные');
+                    $scope.Error = 'Произошла ошибка, возможно вы ввели некорректные данные';
                 })
                 .finally(function(){
                     $scope.isLoading = false;
@@ -163,26 +165,28 @@ angular.element(document).ready(function () {
 angular
     .module('ngGoogleMap', [])
     .directive('ngGoogleMap', function($parse) {
-        var map = undefined, marker;
+        var marker;
         return {
             link: function (scope, element, attributes, model) {
-                map = new google.maps.Map(element[0], {
+                var map = new google.maps.Map(element[0], {
                     center: { lat: 55.763585, lng: 37.560883 },
                     zoom: 7
                 });
 
-                model.$formatters.push(positionRenderer)
+                model.$formatters.push(function(value) {
+					return positionRenderer(value, map);
+				})
             },
             scope: true,
             restrict: 'AE',
             require: 'ngModel',
         };
 
-        function positionRenderer(value) {
+        function positionRenderer(value, map) {
             if(!value){
                 return value;
             }
-            var coords = new google.maps.LatLng(value.Lat, value.Lon);
+            var coords = { lat: value.Lat, lng: value.Lon };
 
             if(marker){
                 marker.setMap(null);
@@ -192,8 +196,8 @@ angular
                 map: map,
                 title:"Hello World!"
             });
+			google.maps.event.trigger(map, 'resize')
             map.setCenter(coords);
-            //map.setCenter(pos);
 
             return value;
         }

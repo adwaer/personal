@@ -7,6 +7,7 @@
     csso = require('gulp-csso'), // Минификация CSS
     imagemin = require('gulp-imagemin'), // Минификация изображений
     uglify = require('gulp-uglify'), // Минификация JS
+    ngAnnotate = require('gulp-ng-annotate'), // Аннатации angularjs правильной обфускации
     concat = require('gulp-concat'), // Склейка файлов
     connect = require('connect'), // Webserver
     server = lr(),
@@ -92,6 +93,16 @@ gulp.task('http-server', function() {
     console.log('Server listening on http://localhost:7778');
 });
 
+// Локальный сервер для отображения
+gulp.task('http-server-live', function() {
+    var app = connect();
+    app.use(serveStatic('./build'));
+    app.listen('7778');
+
+    console.log('Server listening on http://localhost:7778');
+});
+
+
 // Запуск сервера разработки gulp watch
 gulp.task('watch', function() {
     // Предварительная сборка проекта
@@ -164,6 +175,7 @@ gulp.task('build', function() {
     // js
     gulp.src(['./assets/js/**/*.js', '!./assets/js/vendor/**/*.js'])
         .pipe(concat('index.js'))
+        .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest('./build/js'));
 
@@ -177,4 +189,4 @@ gulp.task('build', function() {
         .pipe(gulp.dest('./build'))
 });
 
-gulp.task('default', ['http-server'], function () { });
+gulp.task('default', ['http-server-live'], function () { });
