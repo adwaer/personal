@@ -1,0 +1,41 @@
+﻿include mixins
+
+div(ng-controller='BetsTodayCtrl')
+    h1.page-header Ставки на сегодня
+    .alert.alert-danger(role="alert" ng-show="Error")
+        .alert-link {{Error}}
+    //form.search-form(ng-submit="search()")
+        .row
+            .col-lg-6
+                .alert.alert-danger(role="alert" ng-show="Error")
+                    .alert-link {{Error}}
+                .input-group
+                    input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern" required)
+                    span.input-group-btn
+                        button.btn.btn-default(type="submit") Искать
+
+    h3.sub-header
+        .table-responsive(ng-class="{ loading: isLoading }")
+            +loader
+            div(style="min-height: 500px" ng-class="{ loading: isLoading }")
+                +loader
+                .alert.alert-info(role="alert" ng-hide="bets && bets.length")
+                    .alert-link Отсутствуют данные
+                div(ng-show="bets && bets.length")
+                    .bets(ng-repeat="bet in bets")
+                        .tournament {{bet.Tournament}}
+                        h4.game {{bet.Game}}
+
+                        .forecast
+                            span
+                                label Прогноз:
+                                span.forecast_val {{bet.Forecast}}
+                            span(style="margin-left: 20px;")
+                                label Коэффициент:
+                                span.forecast_val {{bet.Coefficient}}
+
+                        .forecast
+                            span Начало игры: {{bet.GameStartDate | datetime}}
+
+                        .forecast-content
+                            div {{bet.Content}}

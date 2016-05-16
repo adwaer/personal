@@ -1,0 +1,35 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		title Система пользовательских координат
+		meta(id="viewport", name='viewport', content='initial-scale=1')
+		meta(name='format-detection', content='telephone=no')
+		link(rel='stylesheet', media='all', href='./css/vendor.css')
+		link(rel='stylesheet', media='all', href='./css/index.css')
+		link(rel='stylesheet', media='all', href='./css/loader.css')
+
+		// vendor scripts
+		script(src='./js/vendor.js')
+		script(src='https://maps.googleapis.com/maps/api/js?v=3')
+
+		// app
+		script(src='./js/index.js')
+body
+	nav.navbar.navbar-default.navbar-fixed-top
+		.container-fluid
+			.navbar-header
+				a.navbar-brand(href="/") MetaQuotes
+	.container-fluid
+		.row
+			.col-sm-3.col-md-2.sidebar(ng-controller="SidebarCtrl")
+				ul.nav.nav-sidebar
+					li(ng-class="{ active: isActive('#/locatiobyip/') }")
+						a(href="#/locatiobyip") Поиск по IP
+							span.sr-only
+					li(ng-class="{ active: isActive('#/locatiosbycity/') }")
+						a(href="#/locatiosbycity") Поиск по Городу
+							span.sr-only
+					
+			.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main(ng-view)
+				h.page-header Панель

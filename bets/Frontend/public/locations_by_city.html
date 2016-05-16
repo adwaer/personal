@@ -1,0 +1,69 @@
+
+<div ng-controller="LocationsByCityCtrl">
+  <h1 class="page-header">Местоположение пользователя по Городу</h1>
+  <form ng-submit="search()" class="search-form">
+    <div class="row">
+      <div class="col-lg-6">
+        <div role="alert" ng-show="Error" class="alert alert-danger"><a class="alert-link">{{Error}}</a></div>
+        <div class="input-group">
+          <input placeholder="Введите название города" ng-model="searchPattern" class="form-control"/><span class="input-group-btn">
+            <button type="submit" class="btn btn-default">Искать</button></span>
+        </div>
+      </div>
+    </div>
+  </form>
+  <h3 class="sub-header">Результаты поиска</h3>
+  <div ng-class="{ loading: isLoading }" class="table-responsive">
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+    <div role="alert" ng-hide="rows.length" class="alert alert-info">
+      <div class="alert-link">Отсутствуют данные</div>
+    </div>
+    <table ng-show="rows.length" class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Страна</th>
+          <th>Регион</th>
+          <th>Индекс</th>
+          <th>Организация</th>
+          <th>Местоположение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rows">
+          <td>{{$index + 1}}</td>
+          <td>{{row.Country}}</td>
+          <td>{{row.Region}}</td>
+          <td>{{row.Postal}}s</td>
+          <td>{{row.Company}}</td>
+          <td><span ng-click="showInMap(row)" class="label label-info">{{row.Lat}}/{{row.Lon}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script type="text/ng-template" id="map.html">
+    <form ng-submit="closeModal()">
+      <div class="modal-header">
+        <h3 class="modal-title">Местоположение</h3>
+      </div>
+      <div class="modal-body">
+        <div ng-google-map="ng-google-map" ng-model="currentLocation" style="min-height: 300px"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit">Закрыть</button>
+      </div>
+    </form>
+  </script>
+  <script type="text/ng-template" id="uib/template/modal/backdrop.html">
+    <div uib-modal-animation-class="fade" modal-in-class="in" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}"></div>
+  </script>
+  <script type="text/ng-template" id="uib/template/modal/window.html">
+    <div modal-render="{{$isRendered}}" tabindex="-1" role="dialog" uib-modal-animation-class="fade" modal-in-class="in" ng-style="{'z-index': 1050 + index*10, display: 'block'}" class="modal">
+      <div ng-class="size ? 'modal-' + size : ''" class="modal-dialog">
+        <div uib-modal-transclude="uib-modal-transclude" class="modal-content"></div>
+      </div>
+    </div>
+  </script>
+</div>

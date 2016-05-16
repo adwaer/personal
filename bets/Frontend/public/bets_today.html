@@ -1,0 +1,46 @@
+
+<div ng-controller="BetsTodayCtrl">
+  <h1 class="page-header">Ставки на сегодня</h1>
+  <div role="alert" ng-show="Error" class="alert alert-danger">
+    <div class="alert-link">{{Error}}</div>
+  </div>
+  <!--form.search-form(ng-submit="search()")
+  .row
+      .col-lg-6
+          .alert.alert-danger(role="alert" ng-show="Error")
+              .alert-link {{Error}}
+          .input-group
+              input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern" required)
+              span.input-group-btn
+                  button.btn.btn-default(type="submit") Искать
+  
+  -->
+  <h3 class="sub-header">
+    <div ng-class="{ loading: isLoading }" class="table-responsive">
+      <div class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
+      <div style="min-height: 500px" ng-class="{ loading: isLoading }">
+        <div class="loading-overlay">
+          <div class="spinner"></div>
+        </div>
+        <div role="alert" ng-hide="bets &amp;&amp; bets.length" class="alert alert-info">
+          <div class="alert-link">Отсутствуют данные</div>
+        </div>
+        <div ng-show="bets &amp;&amp; bets.length">
+          <div ng-repeat="bet in bets" class="bets">
+            <div class="tournament">{{bet.Tournament}}</div>
+            <h4 class="game">{{bet.Game}}</h4>
+            <div class="forecast"><span>
+                <label>Прогноз:</label><span class="forecast_val">{{bet.Forecast}}</span></span><span style="margin-left: 20px;">
+                <label>Коэффициент:</label><span class="forecast_val">{{bet.Coefficient}}</span></span></div>
+            <div class="forecast"><span>Начало игры: {{bet.GameStartDate | datetime}}</span></div>
+            <div class="forecast-content">
+              <div>{{bet.Content}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </h3>
+</div>

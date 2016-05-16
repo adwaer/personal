@@ -30,6 +30,7 @@
     "jquery": "^2.2.3",
     "ng-annotate": "^1.2.1",
     "npm": "^3.8.7",
+    "rimraf": "^2.5.2",
     "serve-static": "^1.10.2"
   },
   "scripts": {

@@ -1,0 +1,35 @@
+
+<div ng-controller="BetsTodayCtrl">
+  <h1 class="page-header">Ставки на сегодня</h1>
+  <form ng-submit="search()" class="search-form">
+    <div class="row">
+      <div class="col-lg-6">
+        <div role="alert" ng-show="Error" class="alert alert-danger">
+          <div class="alert-link">{{Error}}</div>
+        </div>
+        <!--.input-group
+        input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern" required)
+        span.input-group-btn
+            button.btn.btn-default(type="submit") Искать
+        
+        -->
+      </div>
+    </div>
+  </form>
+  <h3 class="sub-header">Результаты поиска
+    <div ng-class="{ loading: isLoading }" class="table-responsive">
+      <div class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
+      <div style="min-height: 500px" ng-class="{ loading: isLoading }">
+        <div class="loading-overlay">
+          <div class="spinner"></div>
+        </div>
+        <div role="alert" ng-hide="bets &amp;&amp; bets.length" class="alert alert-info">
+          <div class="alert-link">Отсутствуют данные</div>
+        </div>
+        <div>{{Game}}</div>
+      </div>
+    </div>
+  </h3>
+</div>

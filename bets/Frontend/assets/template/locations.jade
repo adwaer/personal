@@ -1,0 +1,57 @@
+﻿include mixins
+
+div(ng-controller='LocationsByCityCtrl')
+    h1.page-header Местоположение пользователя по Городу
+    form.search-form(ng-submit="search()")
+        .row
+            .col-lg-6
+                .alert.alert-danger(role="alert" ng-show="Error")
+                    a.alert-link {{Error}}
+                .input-group
+                    input.form-control(placeholder="Введите название города" ng-model="searchPattern")
+                    span.input-group-btn
+                        button.btn.btn-default(type="submit") Искать
+
+    h3.sub-header Результаты поиска
+    .table-responsive(ng-class="{ loading: isLoading }")
+        +loader
+        .alert.alert-info(role="alert" ng-hide="rows.length")
+            .alert-link Отсутствуют данные
+        table.table.table-striped(ng-show="rows.length")
+            thead
+                tr
+                    th #
+                    th Страна
+                    th Регион
+                    th Индекс
+                    th Организация
+                    th Местоположение
+            tbody
+                tr(ng-repeat="row in rows")
+                    td {{$index + 1}}
+                    td {{row.Country}}
+                    td {{row.Region}}
+                    td {{row.Postal}}s
+                    td {{row.Company}}
+                    td
+                        span.label.label-info(ng-click="showInMap(row)") {{row.Lat}}/{{row.Lon}}
+
+    script(type="text/ng-template" id="map.html")
+        form(ng-submit="closeModal()")
+            .modal-header
+                h3.modal-title Местоположение
+            .modal-body
+                div(ng-google-map ng-model="currentLocation" style="min-height: 300px")
+            .modal-footer
+                button(type="submit") Закрыть
+
+    script(type="text/ng-template" id="uib/template/modal/backdrop.html")
+        div(uib-modal-animation-class="fade" modal-in-class="in" ng-style="{'z-index': 1040 + (index && 1 || 0) + index*10}")
+
+    script(type="text/ng-template" id="uib/template/modal/window.html")
+        div(modal-render="{{$isRendered}}" tabindex="-1" role="dialog" class="modal"
+            uib-modal-animation-class="fade"
+            modal-in-class="in"
+            ng-style="{'z-index': 1050 + index*10, display: 'block'}")
+            .modal-dialog(ng-class="size ? 'modal-' + size : ''")
+                .modal-content(uib-modal-transclude)

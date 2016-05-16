@@ -1,0 +1,20 @@
+﻿include mixins
+
+div(ng-controller='LocationByIpCtrl')
+    h1.page-header Местоположение пользователя по IP
+    form.search-form(ng-submit="search()")
+        .row
+            .col-lg-6
+                .alert.alert-danger(role="alert" ng-show="Error")
+                    .alert-link {{Error}}
+                .input-group
+                    input.form-control(placeholder="Введите IP адрес" ng-model="searchPattern" required)
+                    span.input-group-btn
+                        button.btn.btn-default(type="submit") Искать
+
+    h3.sub-header Результаты поиска
+    div(style="min-height: 500px" ng-class="{ loading: isLoading }")
+        +loader
+        .alert.alert-info(role="alert" ng-hide="currentLocation")
+            .alert-link Отсутствуют данные
+        div(ng-google-map ng-model="currentLocation" style="min-height: 500px" ng-show="currentLocation")
